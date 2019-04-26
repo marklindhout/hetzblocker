@@ -6,7 +6,7 @@
  * @returns: {Object} A configuration object
  */
 
-var hetzblocker = hetzblocker || {}
+var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.common = hetzblocker.common || {}
 
 hetzblocker.common.config = (

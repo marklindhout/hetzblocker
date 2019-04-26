@@ -1,9 +1,11 @@
 'use strict'
 
+/* global browser */
+
 /** @requires ../common/config.js */
 /** @requires prerequisites.js */
 
-var hetzblocker = hetzblocker || {}
+var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.background = hetzblocker.background || {}
 hetzblocker.background.browserbutton = (
   function () {
@@ -55,7 +57,7 @@ hetzblocker.background.browserbutton = (
        */
 
       setBrowserBadgeText: function (text) {
-        browser.browserAction.setBadgeBackgroundColor({color: '#ff0000'})
+        browser.browserAction.setBadgeBackgroundColor({ color: '#ff0000' })
         browser.browserAction.setBadgeText({ text: text })
       },
 

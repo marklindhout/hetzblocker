@@ -1,9 +1,11 @@
 'use strict'
 
+/* global browser */
+
 /** @requires ../common/config.js */
 /** @requires prerequisites.js */
 
-var hetzblocker = hetzblocker || {}
+var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.content = hetzblocker.content || {}
 hetzblocker.content.core = (
   function (window) {
@@ -80,7 +82,7 @@ hetzblocker.content.core = (
        */
 
       documentMutationObserver: function (fn) {
-        var observer = new MutationObserver(fn)
+        var observer = new MutationObserver(fn) // eslint-disable-line no-undef
 
         observer.observe(window.document, {
           subtree: true,

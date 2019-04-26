@@ -1,6 +1,6 @@
 'use strict'
 
-var hetzblocker = hetzblocker || {}
+var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.background = hetzblocker.background || {}
 hetzblocker.background.prerequisites = (
   function () {

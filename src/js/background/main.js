@@ -6,6 +6,8 @@
  * @license {{ pkg.license }}
  */
 
+/* global hetzblocker */
+
 /**
  * Initialize
  *

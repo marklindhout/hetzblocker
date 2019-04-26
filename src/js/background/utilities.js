@@ -1,9 +1,11 @@
 'use strict'
 
+/* global browser */
+
 /** @requires ../common/config.js */
 /** @requires prerequisites.js */
 
-var hetzblocker = hetzblocker || {}
+var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.background = hetzblocker.background || {}
 hetzblocker.background.utilities = (function () {
   return {

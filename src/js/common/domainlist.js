@@ -1,6 +1,6 @@
 'use strict'
 
-var hetzblocker = hetzblocker || {}
+var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.common = hetzblocker.common || {}
 hetzblocker.common.domainlist = (function () {
   return {
@@ -245,7 +245,7 @@ hetzblocker.common.domainlist = (function () {
        */
 
     isUrlBlocked: function (url) {
-      var uri = new URI(url)
+      var uri = new URI(url) // eslint-disable-line no-undef
       var domain = uri.domain()
       var list = hetzblocker.common.domainlist.listedDomains
       var i = 0

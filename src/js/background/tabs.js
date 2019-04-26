@@ -1,9 +1,11 @@
 'use strict'
 
+/* global browser */
+
 /** @requires ../common/config.js */
 /** @requires prerequisites.js */
 
-var hetzblocker = hetzblocker || {}
+var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.background = hetzblocker.background || {}
 hetzblocker.background.tabs = (function () {
   return {
@@ -17,10 +19,9 @@ hetzblocker.background.tabs = (function () {
     checkAllTabsForDomainListing: function () {
       browser.tabs.query({}).then(function (tabs) {
         for (var i = 0; i < tabs.length; i += 1) {
-          if ( tabs[i].url && hetzblocker.common.domainlist.isUrlBlocked(tabs[i].url) ) {
+          if (tabs[i].url && hetzblocker.common.domainlist.isUrlBlocked(tabs[i].url)) {
             hetzblocker.background.browserbutton.setBrowserButtonState('blocked')
-          }
-          else {
+          } else {
             hetzblocker.background.browserbutton.setBrowserButtonState('success')
           }
         }

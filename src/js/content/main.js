@@ -14,4 +14,4 @@
  * @requires core.js
  */
 
-hetzblocker.content.core.init()
+hetzblocker.content.core.init() // eslint-disable-line no-undef
