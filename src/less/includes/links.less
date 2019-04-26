@@ -1,0 +1,23 @@
+/*--------------------------------------------------------------
+## Links
+--------------------------------------------------------------*/
+a {
+	word-break: break-word;
+
+	&,
+	&:link,
+	&:visited {
+		color: saturate(@colorGray6, 15%);
+	}
+
+	&:focus {
+		outline: thin dotted;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: @colorGray8;
+		outline: 0;
+	}
+}

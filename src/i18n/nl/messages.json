@@ -1,0 +1,40 @@
+{
+  "extensionName": {
+    "message": "Hetzblocker",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Blokkeert links en aanvragen naar websites van opruiende mediabedrijven zoals Axel Springer, Telegraaf Media Groep, en anderen.",
+    "description": "Description of the extension."
+  },
+  "installationSuccessMessage": {
+    "message": "Installatie van de Hetzblocker-extensie is geslaagd.",
+    "description": "Extension installation success message."
+  },
+  "browserButtonMessageState_default": {
+    "message": "Ingeschakeld",
+    "description": "Browser button default text label."
+  },
+  "browserButtonMessageState_warning": {
+    "message": "Opgepast!",
+    "description": "Browser button warning text label."
+  },
+  "browserButtonMessageState_success": {
+    "message": "Alles in orde",
+    "description": "Browser button warning text label."
+  },
+  "browserButtonMessageState_blocked": {
+    "message": "Blokkade actief",
+    "description": "Browser button warning text label."
+  },
+  "urlWasBlockedConsoleMessage": {
+    "message": "De volgende URL is geblokkeerd door Hetzblocker: $URL$",
+    "description": "Blocked URL console message.",
+    "placeholders": {
+      "url" : {
+        "content" : "$1",
+        "example" : "https://www.domain.tld"
+      }
+    }
+  }
+}

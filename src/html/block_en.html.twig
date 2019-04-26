@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>This site is blocked</title>
+    <link media="all" rel="stylesheet" href="../css/block.css" />
+    {% include 'partials/favicons.html.twig' with {'state': 'blocked'} %}
+  </head>
+  <body>
+    <div id="extensionPage">
+      {% include 'partials/large_icon.html.twig' with {'state': 'blocked'} %}
+      <h1 class="pageHeading">This site is blocked</h1>
+      <p>Your request was blocked by the <em>Hetzblocker</em> extension.</p>
+      <p>No data was sent to the requested website.</p>
+    </div>
+  </body>
+</html>

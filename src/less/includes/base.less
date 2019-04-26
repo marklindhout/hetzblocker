@@ -1,0 +1,25 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: @fontSizeMobile;
+  
+  @media @MQMobileAndUp {
+    font-size: @fontSizeDesktop;
+  }
+}
+
+body {
+  font-family: @fontFamilyCopy;
+  font-variant-ligatures: discretionary-ligatures common-ligatures contextual historical-ligatures;
+  font-variant-caps: normal;
+  text-rendering: optimizeLegibility;
+  line-height: 1.33;
+  font-size: 100%;
+  background-color: #000000;
+  color: @colorGray8;
+}

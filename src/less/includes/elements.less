@@ -1,0 +1,195 @@
+/* ============================================================
+
+   HEADINGS
+
+=============================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: @fontFamilyHeading;
+	font-weight: normal;
+	font-variant-ligatures: discretionary-ligatures common-ligatures contextual historical-ligatures;
+	font-variant-caps: normal;
+	text-rendering: optimizeLegibility;
+	line-height: 1.2;
+	margin-bottom: @fontSizeM;
+}
+
+h1 {
+	font-size: @fontSizeXXXL;
+	font-weight: bolder;
+}
+
+h2 {
+	font-size: @fontSizeXXL;
+}
+
+h3 {
+	font-size: @fontSizeXL;
+}
+
+h4 {
+	font-size: @fontSizeL;
+	font-weight: bolder;
+}
+
+h5 {
+	font-size: @fontSizeM;
+	font-weight: bolder;
+	font-style: italic;
+}
+
+h6 {
+	font-size: @fontSizeM;
+	margin-bottom: @fontSizeS;
+	font-weight: bolder;
+	font-style: italic;
+}
+
+/* ============================================================
+
+   PARAGRAPHS
+
+=============================================================== */
+
+p {
+	margin: 1rem 0;
+}
+
+/* ============================================================
+
+   INLINE ELEMENTS
+
+=============================================================== */
+
+strong, b {
+	font-weight: bolder;
+}
+
+em, i {
+	font-style: italic;
+}
+
+mark {
+
+}
+
+abbr, acronym {
+	hyphens: none;
+	font-variant-caps: all-small-caps;
+	font-variant: small-caps;
+	font-weight: bolder;
+	text-transform: lowercase;
+	letter-spacing: 0.041rem;
+	border: none;
+	text-decoration: none;
+
+	&[title]:hover {
+		cursor: help;
+	}
+}
+
+sub {
+	font-variant-position: sub;
+}
+
+sup {
+	font-variant-position: super;
+}
+
+small {
+	font-size: @fontSizeS;
+}
+
+/* ============================================================
+
+   MONOSPACE
+
+=============================================================== */
+
+code, pre, kbd, samp, var {
+	hyphens: none;
+	font-family: @fontFamilyFixed;
+	font-size: @fontSizeS;
+}
+
+code {
+	white-space: pre;
+}
+
+pre {
+	white-space: pre;
+}
+
+pre code {
+	word-wrap: normal;
+	white-space: pre-wrap;
+}
+
+/* ============================================================
+
+   QUOTES
+
+=============================================================== */
+
+q, blockquote {
+	hyphens: none;
+	font-style: italic;
+	font-variant-ligatures: discretionary-ligatures common-ligatures contextual historical-ligatures;
+	letter-spacing: 0;
+
+	em, i {
+		font-style: normal;
+	}
+}
+
+q {
+	&:before {
+		content: '“';
+	}
+
+	&:after {
+		content: '”';
+	}
+}
+
+blockquote {
+	padding: 0 0 0 @fontSizeM;
+	margin: 0 0 0 @fontSizeM;
+	border-left: 2px solid saturate(@colorGray3, 25%);
+
+	p {
+		&:before {
+			content: '“';
+		}
+
+		&:after {
+			content: '”';
+		}
+	}
+}
+
+p + blockquote,
+blockquote + blockquote,
+blockquote + p {
+	margin-top: 0;
+}
+
+/* ============================================================
+
+   LISTS
+
+=============================================================== */
+
+ol, ul, dl {
+	margin-left: @fontSizeXL;
+	padding-left: 0;
+
+	li {
+		margin: @fontSizeXXS 0;
+	}
+}
