@@ -32,7 +32,7 @@ hetzblocker.background.request = (function () {
     checkUrlListingStatus: function (details) {
       var url = details.url
 
-      if (hetzblocker.common.domainutilities.isUrlBlocked(url)) {
+      if (hetzblocker.common.listutilities.isUrlBlocked(url)) {
         hetzblocker.background.browserbutton.setBrowserButtonState('blocked')
         return hetzblocker.background.request.redirectToBlockMessagePage()
       }

@@ -19,7 +19,7 @@ hetzblocker.background.tabs = (function () {
     checkAllTabsForUrlListing: function () {
       browser.tabs.query({}).then(function (tabs) {
         for (var i = 0; i < tabs.length; i += 1) {
-          if (tabs[i].url && hetzblocker.common.domainutilities.isUrlBlocked(tabs[i].url)) {
+          if (tabs[i].url && hetzblocker.common.listutilities.isUrlBlocked(tabs[i].url)) {
             hetzblocker.background.browserbutton.setBrowserButtonState('blocked')
           } else {
             hetzblocker.background.browserbutton.setBrowserButtonState('success')

@@ -57,7 +57,7 @@ hetzblocker.content.core = (
           var currentLink = allLinksInDocument[i]
 
           if (currentLink.href) {
-            if (hetzblocker.common.domainutilities.isUrlBlocked(currentLink.href)) {
+            if (hetzblocker.common.listutilities.isUrlBlocked(currentLink.href)) {
               hetzblocker.content.core.addListedClassToElement(currentLink)
               hetzblocker.content.core.disableHrefAttribute(currentLink)
               hetzblocker.content.core.removeAllEventListeners(currentLink)

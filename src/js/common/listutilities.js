@@ -2,7 +2,7 @@
 
 var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.common = hetzblocker.common || {}
-hetzblocker.common.domainutilities = (function () {
+hetzblocker.common.listutilities = (function () {
   return {
 
     /**
@@ -40,7 +40,7 @@ hetzblocker.common.domainutilities = (function () {
 
     isDomainBlocked: function (url) {
       var domain = new URI(url).domain() // eslint-disable-line no-undef
-      var list = hetzblocker.common.domainutilities.getListedDomains()
+      var list = hetzblocker.common.listutilities.getListedDomains()
       var i = list.length - 1
 
       while (i >= 0) {
@@ -65,7 +65,7 @@ hetzblocker.common.domainutilities = (function () {
 
     isPageBlocked: function (url) {
       var uri = new URI(url).normalize() // eslint-disable-line no-undef
-      var list = hetzblocker.common.domainutilities.getListedPages()
+      var list = hetzblocker.common.listutilities.getListedPages()
       var i = list.length - 1
 
       while (i >= 0) {
@@ -93,8 +93,8 @@ hetzblocker.common.domainutilities = (function () {
      */
 
     isUrlBlocked: function (url) {
-      var db = hetzblocker.common.domainutilities.isDomainBlocked(url)
-      var pb = hetzblocker.common.domainutilities.isPageBlocked(url)
+      var db = hetzblocker.common.listutilities.isDomainBlocked(url)
+      var pb = hetzblocker.common.listutilities.isPageBlocked(url)
 
       if (db || pb) {
         console.log(browser.i18n.getMessage('urlWasBlockedConsoleMessage', url)) // eslint-disable-line no-undef
