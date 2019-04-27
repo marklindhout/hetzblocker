@@ -4,18 +4,19 @@ var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
 hetzblocker.common = hetzblocker.common || {}
 hetzblocker.common.domainlist = (function () {
   return {
-    listedDomains: [
+    list: [
+      'akamized.net',
       'amiado.com',
       'amiadogroup.com',
       'antenne.de',
       'antenne1.de',
-      'api-co.la.welt.de',
       'artcollector-magazin.de',
       'artinvestor.de',
       'as-konzerneinkauf.de',
       'asv.de',
       'audiovideofotobild.de',
       'aufeminin.com',
+      'auto-bild.de',
       'auto-bild.ro',
       'auto-swiat.pl',
       'auto-wirtschaft.ch',
@@ -41,7 +42,6 @@ hetzblocker.common.domainlist = (function () {
       'autoleht.ee',
       'autoplus.fr',
       'autoshow.com.tr',
-      'autotip.auto.cz',
       'autoundwirtschaft.at',
       'autovisie.nl',
       'autoweek.nl',
@@ -63,9 +63,9 @@ hetzblocker.common.domainlist = (function () {
       'bilanz-magazin.de',
       'bild.de',
       'bildconnect.de',
-      'bilder.bild.de',
       'bildderfrau.de',
       'bildmobil.de',
+      'bildstatic.de',
       'blau-magazin.de',
       'blic.rs',
       'blikk.hu',
@@ -75,33 +75,30 @@ hetzblocker.common.domainlist = (function () {
       'buecher.de',
       'businessinsider.de',
       'bz-berlin.de',
-      'bz.de',
       'bz-jobs.de',
-      'c.finanzen.net',
+      'bz.de',
       'carwale.com',
       'casamundo.com',
       'clever-tanken.de',
-      'code.bildstatic.de',
+      'computer-bild.de',
       'computerbild.de',
       'computerbildspiele.de',
       'daskapital.nl',
       'dnn-online.de',
       'dnn.de',
-      'dzienniksport.pl',
       'dwdl.de',
+      'dzienniksport.pl',
       'ein-herz-fuer-kinder.de',
       'emarketer.com',
       'europeanvoice.com',
       'fakt.pl',
       'faz.de',
       'faz.net',
-      'fernsehen.welt.de',
       'ffh.de',
       'ffn.de',
       'finanz.ru',
       'finanzen.ch',
       'finanzen.net',
-      'flug.idealo.de',
       'foodbarn.com',
       'forbes.pl',
       'forbes.ru',
@@ -116,15 +113,11 @@ hetzblocker.common.domainlist = (function () {
       'gooieneemlander.nl',
       'groupdeal.nl',
       'gruenderszene.de',
-      'gutscheine.computerbild.de',
       'haarlemsdagblad.nl',
       'handelszeitung.ch',
-      'i.auto-bild.de',
-      'i.computer-bild.de',
       'idealo.de',
       'ijmuidercourant.nl',
       'ikiosk.de',
-      'images.finanzen.net',
       'immergruen-medien.de',
       'immonet.de',
       'immoweb.be',
@@ -139,11 +132,10 @@ hetzblocker.common.domainlist = (function () {
       'leidschdagblad.nl',
       'lesershop24.de',
       'lonny.com',
-      'marketing.computerbild.de',
       'mazandmore.de',
-      'meedia.de',
       'mediaimpact.de',
       'medienmagazin.de',
+      'meedia.de',
       'meinestadt.de',
       'meinprospekt.de',
       'metal-hammer.de',
@@ -159,7 +151,6 @@ hetzblocker.common.domainlist = (function () {
       'ozy.com',
       'partyguide.ch',
       'personalmarkt.de',
-      'piwik.up.welt.de',
       'playpc.pl',
       'pme.ch',
       'politico.eu',
@@ -167,8 +158,6 @@ hetzblocker.common.domainlist = (function () {
       'radiohamburg.de',
       'radionrw.de',
       'relatieplanet.nl',
-      'rem-track.bild.de',
-      'resources-production.la.welt.de',
       'rollingstone.de',
       'rs2.de',
       'runtastic.com',
@@ -176,27 +165,13 @@ hetzblocker.common.domainlist = (function () {
       'schwarzkopf-stiftung.de',
       'schweizerbank.ch',
       'schweizerversicherung.ch',
-      'scripts.finanzen.net',
       'seloger.com',
       'sonntagsmarkt-vertrieb.de',
       'speurders.nl',
       'sportauto.fr',
-      'sportbild.bild.de',
       'sportbild.de',
-      'sportdaten.sportbild.bild.de',
       'sports.pl',
       'sporttotal.tv',
-      'spr.welt.de',
-      'springer02.webtrekk.net',
-      'static-finanzen.businessinsider.de',
-      'static.businessinsider.de',
-      'static.ein-herz-fuer-kinder.de',
-      'static1.businessinsider.de',
-      'static2.businessinsider.de',
-      'static3.businessinsider.de',
-      'static4.businessinsider.de',
-      'static5.businessinsider.de',
-      'static6.businessinsider.de',
       'stepstone.com',
       'stepstone.de',
       'students.at',
@@ -204,7 +179,6 @@ hetzblocker.common.domainlist = (function () {
       'students.de',
       'stylebistro.com',
       'stylebook.de',
-      'styles.finanzen.net',
       'techbook.de',
       'tele.ch',
       'telegraaf.nl',
@@ -212,7 +186,6 @@ hetzblocker.common.domainlist = (function () {
       'telesport.nl',
       'testbild.de',
       'tmg.nl',
-      'tmssl.akamized.net',
       'totaljobs.com',
       'transfermarkt.de',
       'transfermarkt.tv',
@@ -222,43 +195,17 @@ hetzblocker.common.domainlist = (function () {
       'umzugsauktion.de',
       'upday.com',
       'usgang.ch',
-      'vip-club.computer-bild.de',
       'vrouw.nl',
       'wams.de',
-      'welt.de',
+      'webtrekk.net',
       'welt-kompakt.de',
+      'welt.de',
       'weltn24.de',
       'werkenbijtmg.nl',
       'yad2.co.il',
       'yoc.de',
       'zanox.de',
       'zimbio.com'
-    ],
-
-    /**
-       * Checks the given url against the central list object.
-       *
-       * @param {String} url - A full URL
-       * @returns {Boolean} Blocked status
-       *
-       * @requires ../vendor/uri.js
-       */
-
-    isUrlBlocked: function (url) {
-      var uri = new URI(url) // eslint-disable-line no-undef
-      var domain = uri.domain()
-      var list = hetzblocker.common.domainlist.listedDomains
-      var i = 0
-
-      while (i < list.length) {
-        if (list[i] === domain) {
-          return true
-        }
-
-        i += 1
-      }
-
-      return false
-    }
+    ]
   }
 })()

@@ -1,7 +1,5 @@
 'use strict'
 
-/* global browser */
-
 /** @requires ../common/config.js */
 /** @requires prerequisites.js */
 
@@ -48,29 +46,23 @@ hetzblocker.content.core = (
       /**
        * Scans all links within a page for a match to the domain list.
        *
-       * @requires ../common/domainlist.js
+       * @requires ../common/listutilities.js
        */
 
       scanAllLinks: function () {
         var allLinksInDocument = window.document.querySelectorAll('a')
-        var documentHasListedLinks = false
         var i = 0
 
         for (i; i < allLinksInDocument.length; i += 1) {
           var currentLink = allLinksInDocument[i]
 
           if (currentLink.href) {
-            if (hetzblocker.common.domainlist.isUrlBlocked(currentLink.href)) {
+            if (hetzblocker.common.domainutilities.isUrlBlocked(currentLink.href)) {
               hetzblocker.content.core.addListedClassToElement(currentLink)
               hetzblocker.content.core.disableHrefAttribute(currentLink)
               hetzblocker.content.core.removeAllEventListeners(currentLink)
-              documentHasListedLinks = true
             }
           }
-        }
-
-        if (documentHasListedLinks) {
-          browser.runtime.sendMessage({ documentHasListedLinks: true })
         }
       },
 
@@ -91,23 +83,10 @@ hetzblocker.content.core = (
       },
 
       /**
-       * Adds listener for page unloading
-       */
-
-      addDocumentUnloadListener: function () {
-        window.addEventListener('beforeunload', function (event) {
-          browser.runtime.sendMessage({ documentHasListedLinks: false })
-          event.returnValue = ''
-        })
-      },
-
-      /**
        * Initialize
        */
 
       init: function () {
-        hetzblocker.content.core.addDocumentUnloadListener()
-
         hetzblocker.content.core.documentMutationObserver(function () {
           hetzblocker.content.core.scanAllLinks()
         })

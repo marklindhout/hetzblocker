@@ -18,7 +18,7 @@ hetzblocker.background.state = (function () {
 
     bindTabCloseEventListeners: function () {
       browser.tabs.onRemoved.addListener(function () {
-        hetzblocker.background.tabs.checkAllTabsForDomainListing()
+        hetzblocker.background.tabs.checkAllTabsForUrlListing()
       })
     },
 
@@ -31,7 +31,7 @@ hetzblocker.background.state = (function () {
 
     bindWebNavigationEventListeners: function () {
       browser.webNavigation.onBeforeNavigate.addListener(function () {
-        hetzblocker.background.tabs.checkAllTabsForDomainListing()
+        hetzblocker.background.tabs.checkAllTabsForUrlListing()
       })
     },
 
@@ -44,7 +44,7 @@ hetzblocker.background.state = (function () {
     init: function () {
       hetzblocker.background.state.bindWebNavigationEventListeners()
       hetzblocker.background.state.bindTabCloseEventListeners()
-      hetzblocker.background.tabs.checkAllTabsForDomainListing()
+      hetzblocker.background.tabs.checkAllTabsForUrlListing()
     }
   }
 })()

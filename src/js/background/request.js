@@ -16,7 +16,7 @@ hetzblocker.background.request = (function () {
 
     addRequestListener: function () {
       browser.webRequest.onBeforeRequest.addListener(
-        hetzblocker.background.request.checkDomainListingStatus, { urls: ['<all_urls>'] }, ['blocking'])
+        hetzblocker.background.request.checkUrlListingStatus, { urls: ['<all_urls>'] }, ['blocking'])
     },
 
     /**
@@ -24,18 +24,16 @@ hetzblocker.background.request = (function () {
      *
      * @param {String} details - The request details object.
      *
-     * @requires ../common/domainlist.js
+     * @requires ../common/listutilities.js
      * @requires utilities.js
      * @requires browserbutton.js
      */
 
-    checkDomainListingStatus: function (details) {
+    checkUrlListingStatus: function (details) {
       var url = details.url
 
-      if (hetzblocker.common.domainlist.isUrlBlocked(url)) {
-        console.log(browser.i18n.getMessage('urlWasBlockedConsoleMessage', url))
+      if (hetzblocker.common.domainutilities.isUrlBlocked(url)) {
         hetzblocker.background.browserbutton.setBrowserButtonState('blocked')
-
         return hetzblocker.background.request.redirectToBlockMessagePage()
       }
     },

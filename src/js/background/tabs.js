@@ -13,13 +13,13 @@ hetzblocker.background.tabs = (function () {
     /**
      * Checks all tabs for matching to a listed domain
      *
-     * @requires ../common/domainlist.js
+     * @requires ../common/listutilities.js
      */
 
-    checkAllTabsForDomainListing: function () {
+    checkAllTabsForUrlListing: function () {
       browser.tabs.query({}).then(function (tabs) {
         for (var i = 0; i < tabs.length; i += 1) {
-          if (tabs[i].url && hetzblocker.common.domainlist.isUrlBlocked(tabs[i].url)) {
+          if (tabs[i].url && hetzblocker.common.domainutilities.isUrlBlocked(tabs[i].url)) {
             hetzblocker.background.browserbutton.setBrowserButtonState('blocked')
           } else {
             hetzblocker.background.browserbutton.setBrowserButtonState('success')
