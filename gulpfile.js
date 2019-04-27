@@ -10,8 +10,9 @@ fs.readdirSync(gulpDir).forEach(function (file) {
   require(path.join(gulpDir, file))
 })
 
-// The 'buildall' task, for just cleaning and building all resources.
 gulp.task('buildall', gulp.series('clean', gulp.parallel('style', 'docs', 'font', 'html', 'icon', 'i18n', 'script', 'template')))
+gulp.task('dist', gulp.series('buildall', gulp.parallel('dist:firefox', 'dist:chrome')))
 
 // The 'default task', for when Gulp is invoked without a task name.
 gulp.task('default', gulp.series('buildall', 'watch'))
+
