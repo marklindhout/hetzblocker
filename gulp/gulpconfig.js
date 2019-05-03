@@ -19,13 +19,15 @@ const extensionFolderChrome = extensionFolder + '/chrome'
 const webExtConfigFirefox = {
   sourceDir: extensionFolderFirefox,
   artifactsDir: distFolderFirefox,
-  overwriteDest: true
+  overwriteDest: true,
+  warningsAsErrors: true
 }
 
 const webExtConfigChrome = {
   sourceDir: extensionFolderChrome,
   artifactsDir: distFolderChrome,
-  overwriteDest: true
+  overwriteDest: true,
+  warningsAsErrors: true
 }
 
 module.exports = {
