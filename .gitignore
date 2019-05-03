@@ -1,6 +1,7 @@
 ## Project
 build/
 dist/
+web-ext-artifacts/
 
 ### Node.js
 logs

@@ -7,6 +7,8 @@ const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'))
 const sourceFolder = './src'
 const buildFolder = './build/' + pkg.version
 const distFolder = './dist/' + pkg.version
+const distFolderFirefox = distFolder + '/firefox'
+const distFolderChrome = distFolder + '/chrome'
 const extensionFolder = buildFolder + '/extension'
 const extensionFolderFirefox = extensionFolder + '/firefox'
 const extensionFolderChrome = extensionFolder + '/chrome'
@@ -18,5 +20,7 @@ module.exports = {
   extensionFolder,
   extensionFolderChrome,
   extensionFolderFirefox,
+  distFolderFirefox,
+  distFolderChrome,
   pkg
 }
