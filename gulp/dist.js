@@ -1,15 +1,19 @@
 const gulp = require('gulp')
-const gulpZip = require('gulp-zip')
+const webExt = require('web-ext').default
 const config = require('./gulpconfig.js')
 
 gulp.task('dist:firefox', function () {
-  return gulp.src(config.extensionFolderFirefox + '/**/*')
-    .pipe(gulpZip(config.pkg.name + '-' + config.pkg.version + '.zip'))
-    .pipe(gulp.dest(config.distFolderFirefox))
+  return webExt.cmd.build(config.webExtConfigFirefox, {
+    shouldExitProgram: false
+  })
+    .catch(err => console.error(err))
 })
 
 gulp.task('dist:chrome', function () {
-  return gulp.src(config.extensionFolderChrome + '/**/*')
-    .pipe(gulpZip(config.pkg.name + '-' + config.pkg.version + '.zip'))
-    .pipe(gulp.dest(config.distFolderChrome))
+  return webExt.cmd.build(config.webExtConfigChrome, {
+    shouldExitProgram: false
+  })
+    .catch(err => console.error(err))
 })
+
+gulp.task('dist', gulp.parallel('dist:firefox', 'dist:chrome'))
