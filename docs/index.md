@@ -21,7 +21,7 @@ For those of you who would like to help out in a more direct manner: I’m still
 
 ## Developing the browser extension
 
-See [`README.md`](../README.md) in the root of the repository.
+See [`README.md`](https://github.com/marklindhout/hetzblocker/blob/master/README.md) in the root of the repository.
 
 ## Thanks
 
