@@ -1,5 +1,5 @@
 theme: "jekyll-theme-minimal"
 title: "Hetzblocker"
 description: "Hetzblocker is a browser extension for Chrome, Chromium and Firefox that blocks inflammatory media outlets, their publishers, and associated sites."
-logo: "https://github.com/marklindhout/hetzblocker/blob/master/src/img/hetzblocker_logo.svg"
+logo: "https://raw.githubusercontent.com/marklindhout/hetzblocker/master/src/img/hetzblocker_logo.svg"
 show_downloads: "true"
