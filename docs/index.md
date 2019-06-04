@@ -1,4 +1,9 @@
-# Hetzblocker
+---
+title: Hetzblocker — The browser extension that blocks inflammatory media.
+description: Hetzblocker is a browser extension for Chrome, Chromium and Firefox. It blocks inflammatory media outlets, their publishers, and associated sites. All those sites full of clickbaited, confusing, low-effort advertisement lure? — Ain't nobody got time for that!
+---
+
+# Hetzblocker for Firefox, Chromium, and Chrome
 
 Hetzblocker is a browser extension for Chrome, Chromium and Firefox. It blocks inflammatory media outlets, their publishers, and associated sites.
 
