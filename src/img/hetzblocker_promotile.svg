@@ -29,9 +29,9 @@
      inkscape:window-height="1135"
      id="namedview5501"
      showgrid="false"
-     inkscape:zoom="1.84375"
-     inkscape:cx="328.98558"
-     inkscape:cy="145.12225"
+     inkscape:zoom="0.65186406"
+     inkscape:cx="368.20728"
+     inkscape:cy="181.76566"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -68,7 +68,7 @@
   </g>
   <g
      id="g6071"
-     transform="matrix(0.37058332,0,0,0.37058332,127.35417,-17.127318)">
+     transform="matrix(0.29694834,0,0,0.29694834,145.76291,-17.906085)">
     <path
        inkscape:connector-curvature="0"
        d="M 50,233.24718 V 453.6236 C 50,546.18168 130.71556,629.92473 250.00001,674 369.28889,629.92473 450,546.18168 450,453.6236 V 233.24718 L 250.00001,174 Z"
@@ -103,4 +103,17 @@
   <g
      id="g177"
      transform="translate(0,-231.91492)" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:15.87686443px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0e232e;fill-opacity:1;stroke:none;stroke-width:0.3969216"
+     x="27.19565"
+     y="255.35164"
+     id="text924"><tspan
+       sodipodi:role="line"
+       id="tspan922"
+       x="27.19565"
+       y="255.35164"
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:76.20894623px;font-family:Alegreya;-inkscape-font-specification:'Alegreya Heavy';fill:#0e232e;stroke-width:0.3969216">Hetz<tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:76.20894623px;font-family:Alegreya;-inkscape-font-specification:'Alegreya Bold';fill:#ffffff;stroke-width:0.3969216"
+   id="tspan926">Blocker</tspan></tspan></text>
 </svg>
