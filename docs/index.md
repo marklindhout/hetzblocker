@@ -1,10 +1,14 @@
-# Hetzblocker for Firefox, Chromium, and Chrome
+## For Firefox, Chromium, and Chrome.
 
-Hetzblocker is a browser extension for Chrome, Chromium and Firefox. It blocks inflammatory media outlets, their publishers, and associated sites.
+Distracted by all those sites full of clickbaited, confusing, low-effort advertisement lure? Annoyed with the endless stream of tripe media coming your way?
 
-Media that is just a clickbaited, confusing, low-effort advertisement lure?
+_Ain't nobody got time for that!_
 
-“_Ain't nobody got time for that!_”
+That's what **Hetzblocker** is for.
+Take back control of your time and your mental health.
+Block muddleheaded, conspirative, nonsensical media.
+
+Now available in your favorite browser.
 
 ## Features
 
