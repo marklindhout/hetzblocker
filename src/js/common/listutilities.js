@@ -14,7 +14,7 @@ hetzblocker.common.listutilities = (function () {
      */
 
     getListedPages: function () {
-      return hetzblocker.common.pagelist.list
+      return hetzblocker.common.pagelist
     },
 
     /**
@@ -26,7 +26,7 @@ hetzblocker.common.listutilities = (function () {
      */
 
     getListedDomains: function () {
-      return hetzblocker.common.domainlist.list
+      return hetzblocker.common.domainlist
     },
 
     /**
