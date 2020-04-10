@@ -5,10 +5,13 @@ Distracted by all those sites full of clickbaited, confusing, low-effort adverti
 _Ain't nobody got time for that!_
 
 That's what **Hetzblocker** is for.
-Take back control of your time and your mental health.
+Take back your time, protect your mental health and happiness:
 Block muddleheaded, conspirative, nonsensical media.
 
-Now available in your favorite browser.
+Now available in your favorite browser:
+
+  - [Hetzblocker for Firefox](https://addons.mozilla.org/en-US/firefox/addon/hetzblocker/)
+  - [Hetzblocker for Chrome](https://chrome.google.com/webstore/detail/hetzblocker/mhmohgpdkkegialpboobiebjjhgjabii)
 
 ## Features
 
