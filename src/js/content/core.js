@@ -20,13 +20,18 @@ hetzblocker.content.core = (
       },
 
       /**
-       * Sets the element's 'href' attribute to '#'
+       * Removes all element attributes.
        *
        * @param {HTMLElement} element
        */
 
-      disableHrefAttribute: function (element) {
-        element.removeAttribute('href')
+      removeAllAttributes: function (element) {
+        var attrs = element.getAttributeNames()
+        var i = 0
+
+        for (i; i < attrs.length; i += 1) {
+          element.removeAttribute(attrs[i])
+        }
       },
 
       /**
@@ -59,8 +64,8 @@ hetzblocker.content.core = (
           if (currentLink.href) {
             if (hetzblocker.common.listutilities.isUrlBlocked(
               currentLink.href)) {
+              hetzblocker.content.core.removeAllAttributes(currentLink)
               hetzblocker.content.core.addListedClassToElement(currentLink)
-              hetzblocker.content.core.disableHrefAttribute(currentLink)
               hetzblocker.content.core.removeAllEventListeners(currentLink)
             }
           }

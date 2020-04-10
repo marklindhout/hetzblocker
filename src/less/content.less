@@ -5,11 +5,40 @@ html body .hetzblocker__ListedLink:link,
 html body .hetzblocker__ListedLink:active,
 html body .hetzblocker__ListedLink:visited,
 html body .hetzblocker__ListedLink:hover {
-  color: #300 !important;
+  display: block !important;
+  position: relative !important;
+  line-height: (@iconSize * 0.5px) !important;
+  color: #cd5659 !important;
   cursor: not-allowed !important;
   text-decoration: line-through !important;
-  background-color: #5a0000 !important;
-  background-image: linear-gradient(45deg, #ff0000 25%, #960000 25%, #960000 50%, #ff0000 50%, #ff0000 75%, #960000 75%, #960000 100%) !important;
-  background-size: 22.63px 22.63px !important;
+  border: 2px solid #fe8e91 !important;
+  border-radius: 4px !important;
+  background-color: #ffe1dd !important;
+  background-image: linear-gradient(45deg, #fec6c8 25%, #ffd3d6 25%, #ffd3d6 50%, #fec6c8 50%, #fec6c8 75%, #ffd3d6 75%, #ffd3d6 100%) !important;
+  background-size: (@iconSize * 1px) (@iconSize * 1px) !important;
+  background-repeat: repeat !important;
+  text-shadow: none !important;
+  overflow: visible !important;
+  min-height: (@iconSize * 1.125px) !important;
+  
+  &:before {
+    content: "" !important;
+    display: inline-block !important;
+    width: (@iconSize * 1px) !important;
+    height: (@iconSize * 1px) !important;
+    position: absolute !important;
+    left: -2px !important;
+    top: -2px !important;
+    z-index: 2 !important;
+    background-image: url("../icon/icon_blocked_@{iconSize}.png") !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+  
+  * {
+    color: #cd5659 !important;
+    cursor: not-allowed !important;
+    text-decoration: line-through !important;
+  }
 }
 
