@@ -3,13 +3,15 @@ const gulpDocumentation = require('gulp-documentation')
 const config = require('./gulpconfig.js')
 
 // Generate HTML documentation
-gulp.task('docs:background', function () {
-  return gulp.src([
+gulp.task('docs:background', function (cb) {
+  gulp.src([
     config.sourceFolder + '/js/**/*.js',
     '!' + config.sourceFolder + '/js/vendor/**/*'
   ])
     .pipe(gulpDocumentation('html'))
     .pipe(gulp.dest(config.buildFolder + '/docs'))
+  
+  cb()
 })
 
 gulp.task('docs', gulp.parallel('docs:background'))

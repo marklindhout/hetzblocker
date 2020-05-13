@@ -1,20 +1,18 @@
 const fs = require('fs')
 const path = require('path')
 
-// Load the package.json for use in templates and tasks.
-const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'))
-
-const projectRootDir = path.dirname(__dirname)
+const root = path.dirname(path.resolve('..', __dirname))
+const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json')))
 
 // Set the project's important folders for re-use in tasks.
-const sourceFolder = projectRootDir + '/src'
-const buildFolder = projectRootDir + '/build/' + pkg.version
-const distFolder = projectRootDir + '/dist/' + pkg.version
-const distFolderFirefox = distFolder + '/firefox'
-const distFolderChrome = distFolder + '/chrome'
-const extensionFolder = buildFolder + '/extension'
-const extensionFolderFirefox = extensionFolder + '/firefox'
-const extensionFolderChrome = extensionFolder + '/chrome'
+const sourceFolder = path.join(root, 'src')
+const buildFolder = path.join(root, 'build', pkg.version)
+const distFolder = path.join(root, 'dist', pkg.version)
+const distFolderFirefox = path.join(distFolder, 'firefox')
+const distFolderChrome = path.join(distFolder, 'chrome')
+const extensionFolder = path.join(buildFolder, 'extension')
+const extensionFolderFirefox = path.join(extensionFolder, 'firefox')
+const extensionFolderChrome = path.join(extensionFolder, 'chrome')
 
 const webExtConfigFirefox = {
   sourceDir: extensionFolderFirefox,
