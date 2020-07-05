@@ -6,6 +6,7 @@ const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json')))
 
 // Set the project's important folders for re-use in tasks.
 const sourceFolder = path.join(root, 'src')
+const testsFolder = path.join(root, '__tests__')
 const buildFolder = path.join(root, 'build', pkg.version)
 const distFolder = path.join(root, 'dist', pkg.version)
 const distFolderFirefox = path.join(distFolder, 'firefox')
@@ -30,6 +31,7 @@ const webExtConfigChrome = {
 
 module.exports = {
   sourceFolder,
+  testsFolder,
   buildFolder,
   distFolder,
   extensionFolder,
