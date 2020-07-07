@@ -61,7 +61,7 @@ To create an unpacked extension for all browser templates, you can run:
 npx gulp buildall
 ```
 
-This will place the built, unpacked extensions into: `./build/VERSION/extension/BROWSER/`
+This will place the built, unpacked extensions into: `build/extension/BROWSER/`
 
 You can then load these folders’ `manifest.json` files into your browser to test them.
 
@@ -73,7 +73,7 @@ This task will create a versioned, zipped version of the browser extension, run:
 npx gulp dist
 ```
 
-The ZIP files will be placed in the folder `./dist/VERSION/BROWSER/hetzblocker-VERSION.zip`
+The ZIP files will be placed in the folder `dist/BROWSER/hetzblocker-VERSION.zip`
 
 # Troubleshooting
 
