@@ -1,7 +1,12 @@
 const gulp = require('gulp')
-const gulpConcat = require('gulp-concat')
-const gulpResolveDependencies = require('gulp-resolve-dependencies')
+const browserify = require('browserify')
+const gulpBabel = require('gulp-babel');
+const gulpBuffer = require('gulp-buffer')
+const gulpLog = require('fancy-log')
+const gulpRename = require('gulp-rename')
 const gulpStandard = require('gulp-standard')
+const gulpTap = require('gulp-tap')
+const gulpUglify = require('gulp-uglify')
 const config = require('./gulpconfig.js')
 
 gulp.task('script:background:lint', function () {
@@ -14,14 +19,19 @@ gulp.task('script:background:lint', function () {
 })
 
 gulp.task('script:background:build', function () {
-  return gulp.src(config.sourceFolder + '/js/background/main.js')
-    .pipe(gulpResolveDependencies())
-    .on('error', function (err) {
-      console.error(err.message)
-    })
-    .pipe(gulpConcat('background.js', { newLine: ';' }))
-    .pipe(gulp.dest(config.extensionFolderFirefox + '/data/js/'))
-    .pipe(gulp.dest(config.extensionFolderChrome + '/data/js/'))
+  return gulp.src(config.sourceFolder + '/js/background/main.js', { read: false })
+    .pipe(gulpTap(function (file) {
+      gulpLog.info('Bundling: ' + file.path)
+      file.contents = browserify(file.path, { debug: true }).bundle()
+    }))
+    .pipe(gulpBuffer())
+    .pipe(gulpBabel({
+      presets: ['@babel/env']
+    }))
+    .pipe(gulpRename('background.js'))
+    .pipe(gulpUglify())
+    .pipe(gulp.dest(config.extensionFolderFirefox + '/data/js'))
+    .pipe(gulp.dest(config.extensionFolderChrome + '/data/js'))
 })
 
 gulp.task('script:content:lint', function () {
@@ -36,14 +46,19 @@ gulp.task('script:content:lint', function () {
 })
 
 gulp.task('script:content:build', function () {
-  return gulp.src(config.sourceFolder + '/js/content/main.js')
-    .pipe(gulpResolveDependencies())
-    .on('error', function (err) {
-      console.error(err.message)
-    })
-    .pipe(gulpConcat('content.js', { newLine: ';' }))
-    .pipe(gulp.dest(config.extensionFolderFirefox + '/data/js/'))
-    .pipe(gulp.dest(config.extensionFolderChrome + '/data/js/'))
+  return gulp.src(config.sourceFolder + '/js/content/main.js', { read: false })
+    .pipe(gulpTap(function (file) {
+      gulpLog.info('Bundling: ' + file.path)
+      file.contents = browserify(file.path, { debug: true }).bundle()
+    }))
+    .pipe(gulpBuffer())
+    .pipe(gulpBabel({
+      presets: ['@babel/env']
+    }))
+    .pipe(gulpRename('content.js'))
+    .pipe(gulpUglify())
+    .pipe(gulp.dest(config.extensionFolderFirefox + '/data/js'))
+    .pipe(gulp.dest(config.extensionFolderChrome + '/data/js'))
 })
 
 gulp.task('script:background',

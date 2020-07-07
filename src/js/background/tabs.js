@@ -1,33 +1,25 @@
 'use strict'
 
-/* global browser */
+var listUtilities = require('../common/listutilities.js')
+var browserButton = require('./browserbutton.js')
+var browser = require('webextension-polyfill')
 
-/** @requires ../common/config.js */
-/** @requires prerequisites.js */
+module.exports = {
+  /**
+   * Checks all tabs for matching to a listed domain
+   */
 
-var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
-hetzblocker.background = hetzblocker.background || {}
-hetzblocker.background.tabs = (function () {
-  return {
-
-    /**
-     * Checks all tabs for matching to a listed domain
-     *
-     * @requires ../common/listutilities.js
-     */
-
-    checkAllTabsForUrlListing: function () {
-      browser.tabs.query({}).then(function (tabs) {
-        for (var i = 0; i < tabs.length; i += 1) {
-          if (tabs[i].url && hetzblocker.common.listutilities.isUrlBlocked(tabs[i].url)) {
-            hetzblocker.background.browserbutton.setBrowserButtonState('blocked')
-          } else {
-            hetzblocker.background.browserbutton.setBrowserButtonState('success')
-          }
+  checkAllTabsForUrlListing: function () {
+    browser.tabs.query({}).then(function (tabs) {
+      for (var i = 0; i < tabs.length; i += 1) {
+        if (tabs[i].url && listUtilities.isUrlBlocked(tabs[i].url)) {
+          browserButton.setBrowserButtonState('blocked')
+        } else {
+          browserButton.setBrowserButtonState('success')
         }
-      }, function (err) {
-        console.error(err)
-      })
-    }
+      }
+    }, function (err) {
+      console.error(err)
+    })
   }
-})()
+}

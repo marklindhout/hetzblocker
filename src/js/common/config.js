@@ -6,13 +6,6 @@
  * @returns: {Object} A configuration object
  */
 
-var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
-hetzblocker.common = hetzblocker.common || {}
-
-hetzblocker.common.config = (
-  function () {
-    return {
-      defaultLocale: 'en'
-    }
-  }
-)()
+module.exports = {
+  defaultLocale: 'en'
+}

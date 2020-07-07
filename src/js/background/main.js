@@ -6,12 +6,4 @@
  * @license {{ pkg.license }}
  */
 
-/* global hetzblocker */
-
-/**
- * Initialize
- *
- * @requires core.js
- */
-
-hetzblocker.background.core.init()
+require('./core.js').init()
