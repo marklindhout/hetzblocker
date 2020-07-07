@@ -34,16 +34,26 @@ module.exports = {
    */
 
   isDomainBlocked: function (url) {
-    var domain = new URI(url).domain()
+    let domain = new URI(url).domain()
     var list = this.getListedDomains()
     var i = list.length - 1
 
-    while (i >= 0) {
-      if (list[i] === domain) {
-        return true
-      }
+    if (!domain) {
+      domain = new URI({
+        protocol: 'http',
+        hostname: url
+      })
+        .domain()
+    }
 
-      i -= 1
+    if (domain) {
+      while (i >= 0) {
+        if (list[i] === domain) {
+          return true
+        }
+
+        i -= 1
+      }
     }
 
     return false

@@ -3,7 +3,6 @@
 const browser = require('webextension-polyfill')
 
 module.exports = {
-
   /**
    * Verifies the passed string against a whitelist of possible states.
    *

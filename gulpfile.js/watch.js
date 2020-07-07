@@ -18,7 +18,7 @@ gulp.task('watch:icon', function () {
 })
 
 gulp.task('watch:script', function () {
-  gulp.watch(config.sourceFolder + '/js/**/*', gulp.parallel('script', 'docs'))
+  gulp.watch(config.sourceFolder + '/js/**/*', gulp.parallel('test', 'script', 'docs'))
 })
 
 gulp.task('watch:template', function () {

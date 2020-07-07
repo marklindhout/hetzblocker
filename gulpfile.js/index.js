@@ -18,6 +18,7 @@ gulp.task(
       'html',
       'icon',
       'i18n',
+      'test',
       'script',
       'template'
     )

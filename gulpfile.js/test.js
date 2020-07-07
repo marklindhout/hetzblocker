@@ -1,25 +1,47 @@
 const gulp = require('gulp')
 const gulpJest = require('gulp-jest').default
+const gulpLog = require('fancy-log')
 const config = require('./gulpconfig.js')
 
-// Generate HTML documentation
 gulp.task('test:js', function (cb) {
-  // gulp.src([
-  //   config.sourceFolder + '/js/**/*.js',
-  //   '!' + config.sourceFolder + '/js/vendor/**/*'
-  // ])
-
   process.env.NODE_ENV = 'test'
 
-  gulp.src(config.testsFolder).pipe(gulpJest({
-    'preprocessorIgnorePatterns': [
-      config.buildFolder,
-      config.distFolder,
-      // '<rootDir>/node_modules/',
-      config.sourceFolder + '/js/vendor/'
-    ],
-    'automock': false
-  }))
+  gulp.src(`${config.testsFolder}`)
+    .pipe(gulpJest({
+
+      automock: false,
+      bail: 0,
+      clearMocks: true,
+      collectCoverage: false,
+      coverageDirectory: 'coverage',
+      coveragePathIgnorePatterns: [
+        `${config.rootFolder}/gulpfile.js`,
+        `${config.rootFolder}/node_modules`,
+        `${config.buildFolder}`,
+        `${config.distFolder}`,
+      ],
+      coverageReporters: [
+        'text',
+      ],
+      rootDir: `${config.rootFolder}`,
+      testEnvironment: 'jsdom',
+      testMatch: [
+        `${config.testsFolder}/**/*.js`
+      ],
+      testPathIgnorePatterns: [
+        `${config.rootFolder}/gulpfile.js`,
+        `${config.rootFolder}/node_modules`,
+        `${config.buildFolder}`,
+        `${config.distFolder}`,
+        `${config.sourceFolder}/js/vendor/`
+      ],
+      setupFiles: [
+        'jest-webextension-mock'
+      ]
+    }))
+    .on('error', function (err) {
+      gulpLog.error(err.message)
+    })
 
   cb()
 })
