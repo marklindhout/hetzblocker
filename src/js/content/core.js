@@ -1,5 +1,6 @@
 'use strict'
 
+var prerequisites = require('./prerequisites.js')
 var listUtilities = require('../common/listutilities.js')
 
 module.exports = {
@@ -85,6 +86,8 @@ module.exports = {
    */
 
   init: function () {
+    prerequisites.init()
+
     this.documentMutationObserver(function () {
       this.scanAllLinks()
     })

@@ -1,6 +1,7 @@
 'use strict'
 
 var utilities = require('./utilities.js')
+var prerequisites = require('./prerequisites.js')
 var request = require('./request.js')
 var state = require('./state.js')
 var message = require('./message.js')
@@ -20,8 +21,9 @@ module.exports = {
         browser.tabs.create({
           url: browser.extension.getURL('data/html/install-success_' + locale + '.html')
         })
-
-        console.log(browser.i18n.getMessage('installationSuccessMessage'))
+          .then(function () {
+            console.log(browser.i18n.getMessage('installationSuccessMessage'))
+          })
       }
     })
   },
@@ -31,6 +33,7 @@ module.exports = {
    */
 
   init: function () {
+    prerequisites.init()
     this.addInstalledListener()
     request.addRequestListener()
     state.init()

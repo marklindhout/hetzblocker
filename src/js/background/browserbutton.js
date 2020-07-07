@@ -1,6 +1,6 @@
 'use strict'
 
-var browser = require('webextension-polyfill')
+const browser = require('webextension-polyfill')
 
 module.exports = {
 
