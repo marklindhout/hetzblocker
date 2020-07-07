@@ -15,6 +15,10 @@ test('Domain list contains bild.de', function () {
 })
 
 test('isDomainBlocked', function () {
+  // Non-matching URLSs
+  expect(listUtilities.isDomainBlocked('https://www.google.com/')).toEqual(false)
+  expect(listUtilities.isDomainBlocked('https://lorelle.wordpress.com/')).toEqual(false)
+
   // Bare domains
   expect(listUtilities.isDomainBlocked('bild.de')).toEqual(true)
   expect(listUtilities.isDomainBlocked('welt.de')).toEqual(true)
@@ -40,4 +44,19 @@ test('isDomainBlocked', function () {
   // Query vars
   expect(listUtilities.isDomainBlocked('https://bild.de/?var=val')).toEqual(true)
   expect(listUtilities.isDomainBlocked('https://bild.de/?var=val&another=variable&a[]=1&a[]=2')).toEqual(true)
+})
+
+test('isPageBlocked', function () {
+  // Non-Blocked pages
+  expect(listUtilities.isPageBlocked('https://www.google.com/')).toEqual(false)
+  expect(listUtilities.isPageBlocked('http://google.com')).toEqual(false)
+  expect(listUtilities.isPageBlocked('https://lorelle.wordpress.com/')).toEqual(false)
+  expect(listUtilities.isPageBlocked('https://lorelle.wordpress.com/2009/04/08/example-of-a-perfect-personal-blog/')).toEqual(false)
+  expect(listUtilities.isPageBlocked('https://twitter.com/BVG_Kampagne')).toEqual(false)
+
+  // Blocked pages
+  expect(listUtilities.isPageBlocked('http://facebook.com/bild')).toEqual(true) // no trailing slash
+  expect(listUtilities.isPageBlocked('http://facebook.com/bild/')).toEqual(true)
+  expect(listUtilities.isPageBlocked('https://twitter.com/bild')).toEqual(true) // no trailing slash
+  expect(listUtilities.isPageBlocked('https://twitter.com/bild/')).toEqual(true)
 })

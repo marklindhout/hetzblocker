@@ -12,17 +12,16 @@ gulp.task('test:js', function (cb) {
       automock: false,
       bail: 0,
       clearMocks: true,
-      collectCoverage: false,
-      coverageDirectory: 'coverage',
+      collectCoverage: true,
+      coverageDirectory: `${config.rootFolder}/coverage`,
       coveragePathIgnorePatterns: [
         `${config.rootFolder}/gulpfile.js`,
         `${config.rootFolder}/node_modules`,
         `${config.buildFolder}`,
         `${config.distFolder}`,
       ],
-      coverageReporters: [
-        'text',
-      ],
+      coverageProvider: 'babel',
+      coverageReporters: ['text', 'lcov'],
       rootDir: `${config.rootFolder}`,
       testEnvironment: 'jsdom',
       testMatch: [

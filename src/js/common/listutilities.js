@@ -2,6 +2,7 @@
 
 var pageList = require('./pagelist.js')
 var domainList = require('./domainlist.js')
+var utilities = require('./utilities.js')
 var browser = require('webextension-polyfill')
 var URI = require('urijs')
 
@@ -67,19 +68,17 @@ module.exports = {
    */
 
   isPageBlocked: function (url) {
-    var uri = new URI(url).normalize()
+    var currentUri = new URI(utilities.stripTrailingSlash(url))
     var list = this.getListedPages()
     var i = list.length - 1
 
     while (i >= 0) {
-      var listing = new URI(list[i]).normalize()
-      var uriPath = uri.pathname().toLowerCase()
-      var listingPath = listing.pathname().toLowerCase()
+      var listingUri = new URI(utilities.stripTrailingSlash(list[i]))
 
-      if (listing.domain() === uri.domain()) {
-        if (uriPath.startsWith(listingPath)) {
-          return true
-        }
+      if (currentUri.subdomain() === listingUri.subdomain()
+          && currentUri.domain() === listingUri.domain()
+          && currentUri.pathname() === listingUri.pathname()) {
+        return true
       }
 
       i -= 1

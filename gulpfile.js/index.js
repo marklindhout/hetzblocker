@@ -18,9 +18,11 @@ gulp.task(
       'html',
       'icon',
       'i18n',
-      'test',
-      'script',
-      'template'
+      'template',
+      gulp.series(
+        'test',
+        'script'
+      )
     )
   )
 )
