@@ -1,11 +1,15 @@
+/**
+ * @file Configuration for building, distributing, and testing the browser extension.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const fs = require('fs')
 const path = require('path')
-
-const root = path.dirname(path.resolve('..', __dirname))
+const root = path.resolve(__dirname)
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json')))
 
 // Set the project's important folders for re-use in tasks.
-const rootFolder = path.join(root)
+const rootFolder = root
 const sourceFolder = path.join(root, 'src')
 const testsFolder = path.join(root, '__tests__')
 const buildFolder = path.join(root, 'build')

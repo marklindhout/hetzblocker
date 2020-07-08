@@ -1,43 +1,16 @@
+/**
+ * @file Gulp tasks for testing JavaScript code.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
 const gulpJest = require('gulp-jest').default
 const gulpLog = require('fancy-log')
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 gulp.task('test:js', function (cb) {
-  process.env.NODE_ENV = 'test'
-
-  gulp.src(`${config.testsFolder}`)
-    .pipe(gulpJest({
-
-      automock: false,
-      bail: 0,
-      clearMocks: true,
-      collectCoverage: true,
-      coverageDirectory: `${config.rootFolder}/coverage`,
-      coveragePathIgnorePatterns: [
-        `${config.rootFolder}/gulpfile.js`,
-        `${config.rootFolder}/node_modules`,
-        `${config.buildFolder}`,
-        `${config.distFolder}`,
-      ],
-      coverageProvider: 'babel',
-      coverageReporters: ['text', 'lcov'],
-      rootDir: `${config.rootFolder}`,
-      testEnvironment: 'jsdom',
-      testMatch: [
-        `${config.testsFolder}/**/*.js`
-      ],
-      testPathIgnorePatterns: [
-        `${config.rootFolder}/gulpfile.js`,
-        `${config.rootFolder}/node_modules`,
-        `${config.buildFolder}`,
-        `${config.distFolder}`,
-        `${config.sourceFolder}/js/vendor/`
-      ],
-      setupFiles: [
-        'jest-webextension-mock'
-      ]
-    }))
+  gulp.src(`${config.rootFolder}`)
+    .pipe(gulpJest())
     .on('error', function (err) {
       gulpLog.error(err.message)
     })

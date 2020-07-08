@@ -60,3 +60,18 @@ test('isPageBlocked', function () {
   expect(listUtilities.isPageBlocked('https://twitter.com/bild')).toEqual(true) // no trailing slash
   expect(listUtilities.isPageBlocked('https://twitter.com/bild/')).toEqual(true)
 })
+
+test('isUrlBlocked', function () {
+  // Non-Blocked pages
+  expect(listUtilities.isUrlBlocked('https://www.google.com/')).toEqual(false)
+  expect(listUtilities.isUrlBlocked('http://google.com')).toEqual(false)
+  expect(listUtilities.isUrlBlocked('https://lorelle.wordpress.com/')).toEqual(false)
+  expect(listUtilities.isUrlBlocked('https://lorelle.wordpress.com/2009/04/08/example-of-a-perfect-personal-blog/')).toEqual(false)
+  expect(listUtilities.isUrlBlocked('https://twitter.com/BVG_Kampagne')).toEqual(false)
+
+  // Blocked pages
+  expect(listUtilities.isUrlBlocked('http://facebook.com/bild')).toEqual(true) // no trailing slash
+  expect(listUtilities.isUrlBlocked('http://facebook.com/bild/')).toEqual(true)
+  expect(listUtilities.isUrlBlocked('https://twitter.com/bild')).toEqual(true) // no trailing slash
+  expect(listUtilities.isUrlBlocked('https://twitter.com/bild/')).toEqual(true)
+})

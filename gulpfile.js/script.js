@@ -1,3 +1,8 @@
+/**
+ * @file Gulp tasks for combining, transpiling, testing, and uglifying JavaScript files.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
 const browserify = require('browserify')
 const gulpBabel = require('gulp-babel');
@@ -7,7 +12,7 @@ const gulpRename = require('gulp-rename')
 const gulpStandard = require('gulp-standard')
 const gulpTap = require('gulp-tap')
 const gulpUglify = require('gulp-uglify')
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 gulp.task('script:background:lint', function () {
   return gulp.src(config.sourceFolder + '/js/background/**/*.js')

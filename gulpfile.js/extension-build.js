@@ -1,6 +1,11 @@
+/**
+ * @file Gulp tasks for building the extension using `web-ext`.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
 const webExt = require('web-ext').default
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 gulp.task('extension:build:firefox', function () {
   return webExt.cmd.build(config.webExtConfigFirefox, {

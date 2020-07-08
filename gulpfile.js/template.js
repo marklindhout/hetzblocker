@@ -1,6 +1,11 @@
+/**
+ * @file Gulp tasks for compiling and copying templated files.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
 const gulpTwig = require('gulp-twig')
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 gulp.task('template:firefox', function () {
   return gulp.src(config.sourceFolder + '/template/firefox/**/*')

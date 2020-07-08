@@ -1,5 +1,10 @@
+/**
+ * @file Gulp tasks for copying fonts during build.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 gulp.task('font', function () {
   return gulp.src(config.sourceFolder + '/font/**/*')

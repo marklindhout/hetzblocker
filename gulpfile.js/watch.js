@@ -1,5 +1,10 @@
+/**
+ * @file Gulp tasks for file watchers of various type.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 gulp.task('watch:style', function () {
   gulp.watch(config.sourceFolder + '/less/**/*', gulp.parallel('style'))
@@ -18,7 +23,7 @@ gulp.task('watch:icon', function () {
 })
 
 gulp.task('watch:script', function () {
-  gulp.watch(config.sourceFolder + '/js/**/*', gulp.parallel('test', 'script', 'docs'))
+  gulp.watch([`${config.sourceFolder}/js/**/*`, `${config.testsFolder}/**/*`], gulp.parallel('test', 'script', 'docs'))
 })
 
 gulp.task('watch:template', function () {
