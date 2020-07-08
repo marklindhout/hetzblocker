@@ -1,4 +1,4 @@
-const listUtilities = require('../src/js/common/listutilities.js')
+const listUtilities = require('../../src/js/common/listutilities.js')
 
 test('getListedPages is defined', function () {
   expect(listUtilities.getListedPages).not.toBeUndefined()
@@ -15,6 +15,10 @@ test('Domain list contains bild.de', function () {
 })
 
 test('normalizeToDomain', function () {
+  // Empty url argument
+  expect(function () { listUtilities.normalizeToDomain('') }).toThrow('No URL string specified')
+
+  // Full URLs
   expect(listUtilities.normalizeToDomain('https://www.google.com/')).toEqual('google.com')
   expect(listUtilities.normalizeToDomain('https://sub.example.com/')).toEqual('example.com')
 

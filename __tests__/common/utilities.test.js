@@ -1,4 +1,4 @@
-const utilities = require('../src/js/common/utilities.js')
+const utilities = require('../../src/js/common/utilities.js')
 
 test('isUrlBlocked', function () {
   expect(utilities.stripTrailingSlash('banana/')).toEqual('banana')
