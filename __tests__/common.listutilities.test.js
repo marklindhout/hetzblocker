@@ -14,7 +14,19 @@ test('Domain list contains bild.de', function () {
   expect(dl).toContain('bild.de')
 })
 
+test('normalizeToDomain', function () {
+  expect(listUtilities.normalizeToDomain('https://www.google.com/')).toEqual('google.com')
+  expect(listUtilities.normalizeToDomain('https://sub.example.com/')).toEqual('example.com')
+
+  // Bare domains
+  expect(listUtilities.normalizeToDomain('example.com')).toEqual('example.com')
+  expect(listUtilities.normalizeToDomain('sub.example.com')).toEqual('example.com')
+})
+
 test('isDomainBlocked', function () {
+  // Empty argument
+  expect(function () { listUtilities.isDomainBlocked('') }).toThrow('No URL string specified')
+
   // Non-matching URLSs
   expect(listUtilities.isDomainBlocked('https://www.google.com/')).toEqual(false)
   expect(listUtilities.isDomainBlocked('https://lorelle.wordpress.com/')).toEqual(false)
@@ -47,7 +59,13 @@ test('isDomainBlocked', function () {
 })
 
 test('isPageBlocked', function () {
-  // Non-Blocked pages
+  // Empty argument
+  expect(function () { listUtilities.isPageBlocked('') }).toThrow('No URL string specified')
+
+  // Strange URLs
+  expect(listUtilities.isPageBlocked('/')).toEqual(false)
+
+  // Non-blocked pages
   expect(listUtilities.isPageBlocked('https://www.google.com/')).toEqual(false)
   expect(listUtilities.isPageBlocked('http://google.com')).toEqual(false)
   expect(listUtilities.isPageBlocked('https://lorelle.wordpress.com/')).toEqual(false)
@@ -62,6 +80,9 @@ test('isPageBlocked', function () {
 })
 
 test('isUrlBlocked', function () {
+  // Empty url argument
+  expect(function () { listUtilities.isUrlBlocked('') }).toThrow('No URL string specified')
+
   // Non-Blocked pages
   expect(listUtilities.isUrlBlocked('https://www.google.com/')).toEqual(false)
   expect(listUtilities.isUrlBlocked('http://google.com')).toEqual(false)
@@ -74,4 +95,13 @@ test('isUrlBlocked', function () {
   expect(listUtilities.isUrlBlocked('http://facebook.com/bild/')).toEqual(true)
   expect(listUtilities.isUrlBlocked('https://twitter.com/bild')).toEqual(true) // no trailing slash
   expect(listUtilities.isUrlBlocked('https://twitter.com/bild/')).toEqual(true)
+
+  // Local paths
+  expect(listUtilities.isUrlBlocked('.')).toEqual(false)
+  expect(listUtilities.isUrlBlocked('../../././')).toEqual(false)
+
+  expect(listUtilities.isUrlBlocked('a')).toEqual(false)
+
+  // Erroneous URLs
+  expect(listUtilities.isUrlBlocked('ößäñ')).toEqual(false)
 })
