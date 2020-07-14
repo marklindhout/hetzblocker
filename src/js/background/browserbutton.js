@@ -80,26 +80,16 @@ module.exports = {
     var ns = this.normalizeStateArg(state)
 
     var paths = {
-      '512': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_512.png'),
-      '256': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_256.png'),
-      '128': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_128.png'),
-      '96': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_96.png'),
-      '64': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_64.png'),
-      '48': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_48.png'),
-      '32': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_32.png'),
-      '24': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_24.png'),
-      '19': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_19.png'),
-      '16': browser.extension.getURL(
-        'data/icon/icon_' + ns + '_16.png')
+      '512': browser.extension.getURL('data/icon/icon_' + ns + '_512.png'),
+      '256': browser.extension.getURL('data/icon/icon_' + ns + '_256.png'),
+      '128': browser.extension.getURL('data/icon/icon_' + ns + '_128.png'),
+      '96': browser.extension.getURL('data/icon/icon_' + ns + '_96.png'),
+      '64': browser.extension.getURL('data/icon/icon_' + ns + '_64.png'),
+      '48': browser.extension.getURL('data/icon/icon_' + ns + '_48.png'),
+      '32': browser.extension.getURL('data/icon/icon_' + ns + '_32.png'),
+      '24': browser.extension.getURL('data/icon/icon_' + ns + '_24.png'),
+      '19': browser.extension.getURL('data/icon/icon_' + ns + '_19.png'),
+      '16': browser.extension.getURL('data/icon/icon_' + ns + '_16.png')
     }
 
     browser.browserAction.setIcon({

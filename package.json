@@ -51,6 +51,6 @@
   },
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "test": "jest"
+    "test": "gulp test"
   }
 }
