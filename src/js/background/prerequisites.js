@@ -7,9 +7,6 @@ module.exports = {
    */
 
   init: function () {
-    window.browser =
-      function () {
-        return window.msBrowser || window.browser || window.chrome
-      }
+    window.browser = window.msBrowser || window.browser || window.chrome
   }
 }

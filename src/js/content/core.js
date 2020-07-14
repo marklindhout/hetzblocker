@@ -1,7 +1,8 @@
 'use strict'
 
-var prerequisites = require('./prerequisites.js')
-var listUtilities = require('../common/listutilities.js')
+const prerequisites = require('./prerequisites.js')
+const listUtilities = require('../common/listutilities.js')
+const config = require('../common/config.js')
 
 module.exports = {
 
@@ -12,7 +13,7 @@ module.exports = {
    */
 
   addListedClassToElement: function (element) {
-    element.classList.add('hetzblocker__ListedLink')
+    element.classList.add(config.listedLinkClassName)
   },
 
   /**
@@ -49,7 +50,7 @@ module.exports = {
    */
 
   scanAllLinks: function () {
-    var allLinksInDocument = window.document.querySelectorAll('a')
+    var allLinksInDocument = document.querySelectorAll('a')
     var i = 0
 
     for (i; i < allLinksInDocument.length; i += 1) {
@@ -66,16 +67,16 @@ module.exports = {
   },
 
   /**
-   * Watches the document DOM element for mutations, and triggers the given'
+   * Watches the document DOM element for mutations, and triggers the given
    * function when that happens.
    *
    * @param {Function} fn - This callback is triggered when mutation occurs.
    */
 
-  documentMutationObserver: function (fn) {
-    var observer = new MutationObserver(fn) // eslint-disable-line no-undef
+  bindDocumentMutationObserver: function (fn) {
+    const observer = new MutationObserver(fn) // eslint-disable-line no-undef
 
-    observer.observe(window.document, {
+    observer.observe(document, {
       subtree: true,
       childList: true
     })
@@ -87,12 +88,7 @@ module.exports = {
 
   init: function () {
     prerequisites.init()
-
-    this.documentMutationObserver(function () {
-      this.scanAllLinks()
-    })
-
+    this.bindDocumentMutationObserver(this.scanAllLinks.bind(this))
     this.scanAllLinks()
   }
-
 }

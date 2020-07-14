@@ -7,5 +7,6 @@
  */
 
 module.exports = {
-  defaultLocale: 'en'
+  defaultLocale: 'en',
+  listedLinkClassName: 'hetzblocker__ListedLink'
 }

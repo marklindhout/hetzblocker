@@ -1,6 +1,16 @@
 const bb = require('../../src/js/background/browserbutton.js')
 const config = require('../../src/js/common/config.js')
 
+// I18n mock
+const trans = require('../../src/i18n/en/messages.json')
+
+// Browser mocks
+browser.i18n.getMessage = jest.fn(function (str) {
+  return trans[str].message
+})
+
+browser.browserAction.setTitle = jest.fn(browser.browserAction.setTitle)
+
 test('isValidState', function () {
   // No arguments.
   expect(bb.isValidState()).toEqual(false)
@@ -61,31 +71,31 @@ test('setBrowserBadgeText', function () {
 })
 
 test('setBrowserButtonTitle', function () {
-  // Expect this function to actually call the API.
-  browser.browserAction.setTitle = jest.fn()
-  browser.i18n.getMessage = jest.fn()
-
   // Call without argument, reverts to 'default' string.
   bb.setBrowserButtonTitle()
-  expect(browser.browserAction.setTitle).toHaveBeenCalled()
   expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_default')
+  expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_default.message}` })
 
   // States
   bb.setBrowserButtonTitle('default')
   expect(browser.browserAction.setTitle).toHaveBeenCalled()
   expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_default')
+  expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_default.message}` })
 
   bb.setBrowserButtonTitle('blocked')
   expect(browser.browserAction.setTitle).toHaveBeenCalled()
   expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_blocked')
+  expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_blocked.message}` })
 
   bb.setBrowserButtonTitle('warning')
   expect(browser.browserAction.setTitle).toHaveBeenCalled()
   expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_warning')
+  expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_warning.message}` })
 
   bb.setBrowserButtonTitle('success')
   expect(browser.browserAction.setTitle).toHaveBeenCalled()
   expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_success')
+  expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_success.message}` })
 })
 
 test('setBrowserButtonIcon', function () {
@@ -160,8 +170,7 @@ test('setBrowserButtonIcon', function () {
   expect(browser.browserAction.setIcon).toHaveBeenLastCalledWith({ path: paths_success })
 })
 
-test('setBrowserButtonState',function () {
-
+test('setBrowserButtonState', function () {
   bb.setBrowserButtonIcon = jest.fn(bb.setBrowserButtonIcon)
   bb.setBrowserButtonTitle = jest.fn(bb.setBrowserButtonTitle)
 
