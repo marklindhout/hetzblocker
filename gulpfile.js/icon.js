@@ -1,6 +1,11 @@
+/**
+ * @file Gulp tasks for generating and resizing icons.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
 const gulpResponsive = require('gulp-responsive')
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 gulp.task('icon', function () {
   return gulp.src(config.sourceFolder + '/icon/**/*')

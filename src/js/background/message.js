@@ -1,49 +1,38 @@
 'use strict'
 
-/* global browser */
+var browserButton = require('./browserbutton.js')
+var browser = require('webextension-polyfill')
 
-/** @requires ../common/config.js */
-/** @requires prerequisites.js */
+module.exports = {
+  /**
+   * Handles incoming messages
+   *
+   * @param {Object} request - Request from the content script.
+   */
 
-var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
-hetzblocker.background = hetzblocker.background || {}
-hetzblocker.background.message = (
-  function () {
-    return {
-
-      /**
-       * Handles incoming messages
-       *
-       * @param {Object} request - Request from the content script.
-       *
-       * @requires browserbutton.js
-       */
-
-      messageHandler: function (request) {
-        if (request.documentHasListedLinks) {
-          hetzblocker.background.browserbutton.setBrowserBadgeText('!!!')
-        } else {
-          hetzblocker.background.browserbutton.setBrowserBadgeText('')
-        }
-      },
-
-      /**
-       * Add an event listener for messages
-       */
-
-      addMessageListener: function () {
-        browser.runtime.onMessage.addListener(
-          hetzblocker.background.message.messageHandler)
-      },
-
-      /**
-       * Initialize the messaging system
-       */
-
-      init: function () {
-        hetzblocker.background.message.addMessageListener()
-      }
-
+  messageHandler: function (request) {
+    if (request.documentHasListedLinks) {
+      browserButton.setBrowserBadgeText('!!!')
+    } else {
+      browserButton.setBrowserBadgeText('')
     }
+  },
+
+  /**
+   * Add an event listener for messages
+   */
+
+  addMessageListener: function () {
+    browser.runtime.onMessage.addListener(
+      this.messageHandler)
+  },
+
+  /**
+   * Initialize the messaging system
+   */
+
+  init: function () {
+    this.addMessageListener()
   }
-)()
+
+}

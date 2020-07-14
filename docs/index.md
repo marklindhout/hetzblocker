@@ -17,7 +17,7 @@ Now available in your favorite browser:
 
  - Blocks all requests to inflammatory media and platforms. For example Axel Springer, De Telegraaf Media Groep, and many more.
  - Saves you the stress you build up from reading nonsensical articles.
- - Bonus: Protects you from seeing truely muddleheaded comment sections on these sites.
+ - Bonus: Protects you from seeing truly muddleheaded comment sections on these sites.
  - Indicates and disables links to blocked sites everywhere — Handy for search results, source reference sections, etc.
 
 ## Contribute

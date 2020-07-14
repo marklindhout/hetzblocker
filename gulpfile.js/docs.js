@@ -1,6 +1,11 @@
+/**
+ * @file Gulp tasks for generating documentation.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
 const gulpDocumentation = require('gulp-documentation')
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 // Generate HTML documentation
 gulp.task('docs:background', function (cb) {
@@ -10,7 +15,7 @@ gulp.task('docs:background', function (cb) {
   ])
     .pipe(gulpDocumentation('html'))
     .pipe(gulp.dest(config.buildFolder + '/docs'))
-  
+
   cb()
 })
 

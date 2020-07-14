@@ -1,10 +1,17 @@
-// Required modules
+/**
+ * @file Gulp tasks for building, testing, and distributing the extension.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
 
 fs.readdirSync(__dirname).forEach(function (file) {
-  require(path.join(__dirname, file))
+  if (file !== 'index.js' && file.endsWith('.js')) {
+    const taskModulePath = path.join(__dirname, file)
+    require(taskModulePath)
+  }
 })
 
 gulp.task(
@@ -18,8 +25,11 @@ gulp.task(
       'html',
       'icon',
       'i18n',
-      'script',
-      'template'
+      'template',
+      gulp.series(
+        'test',
+        'script'
+      )
     )
   )
 )

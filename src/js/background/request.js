@@ -1,58 +1,47 @@
 'use strict'
 
-/* global browser */
+var utilities = require('./utilities.js')
+var browserButton = require('./browserbutton.js')
+var listUtilities = require('../common/listutilities.js')
+var browser = require('webextension-polyfill')
 
-/** @requires ../common/config.js */
-/** @requires prerequisites.js */
+module.exports = {
+  /**
+   * Listener for the navigation event
+   */
 
-var hetzblocker = hetzblocker || {} // eslint-disable-line no-use-before-define
-hetzblocker.background = hetzblocker.background || {}
-hetzblocker.background.request = (function () {
-  return {
+  addRequestListener: function () {
+    browser.webRequest.onBeforeRequest.addListener(
+      this.checkUrlListingStatus.bind(this), { urls: ['<all_urls>'] }, ['blocking'])
+  },
 
-    /**
-     * Listener for the navigation event
-     */
+  /**
+   * Check a domain's listing status
+   *
+   * @param {String} details - The request details object.
+   */
 
-    addRequestListener: function () {
-      browser.webRequest.onBeforeRequest.addListener(
-        hetzblocker.background.request.checkUrlListingStatus, { urls: ['<all_urls>'] }, ['blocking'])
-    },
+  checkUrlListingStatus: function (details) {
+    var url = details.url
 
-    /**
-     * Check a domain's listing status
-     *
-     * @param {String} details - The request details object.
-     *
-     * @requires ../common/listutilities.js
-     * @requires utilities.js
-     * @requires browserbutton.js
-     */
-
-    checkUrlListingStatus: function (details) {
-      var url = details.url
-
-      if (hetzblocker.common.listutilities.isUrlBlocked(url)) {
-        hetzblocker.background.browserbutton.setBrowserButtonState('blocked')
-        return hetzblocker.background.request.redirectToBlockMessagePage()
-      }
-    },
-
-    /**
-     * Redirection to the blocked message page
-     *
-     * @requires utilities.js
-     */
-
-    redirectToBlockMessagePage: function () {
-      var locale = hetzblocker.background.utilities.getSimplifiedBrowserLocale()
-      var blockMessageUrl = browser.extension.getURL(
-        'data/html/block_' + locale + '.html')
-
-      return {
-        redirectUrl: blockMessageUrl
-      }
+    if (listUtilities.isUrlBlocked(url)) {
+      browserButton.setBrowserButtonState('blocked')
+      return this.redirectToBlockMessagePage()
     }
+  },
 
+  /**
+   * Redirection to the blocked message page
+   */
+
+  redirectToBlockMessagePage: function () {
+    var locale = utilities.getSimplifiedBrowserLocale()
+    var blockMessageUrl = browser.extension.getURL(
+      'data/html/block_' + locale + '.html')
+
+    return {
+      redirectUrl: blockMessageUrl
+    }
   }
-})()
+
+}

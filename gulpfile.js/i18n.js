@@ -1,5 +1,10 @@
+/**
+ * @file Gulp tasks for copying locale files.
+ * @author Mark Lindhout <hetzblocker@marklindhout.com>
+ */
+
 const gulp = require('gulp')
-const config = require('./gulpconfig.js')
+const config = require('../project.config.js')
 
 // Copy over localization files
 gulp.task('i18n:firefox', function () {

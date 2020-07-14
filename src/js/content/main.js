@@ -8,10 +8,4 @@
  * @license {{ pkg.license }}
  */
 
-/**
- * Initialize
- *
- * @requires core.js
- */
-
-hetzblocker.content.core.init() // eslint-disable-line no-undef
+require('./core.js').init()

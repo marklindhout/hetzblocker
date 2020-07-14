@@ -37,8 +37,8 @@ There is no transpilation taking place: It’s ES5 all the way down.
 
 ## System Requirements
 
-  - **[Node.js](https://nodejs.org/)**, version 8 or higher.
-  - **NPM**, version 5 or higher. NPM is usually included with Node.js.
+  - **[Node.js](https://nodejs.org/)**, version 13 was tested, others might work.
+  - **NPM**, version 6 or higher. (NPM is usually included with Node.js)
 
 ### Setup
 First, you need to install NPM modules using:
@@ -61,7 +61,7 @@ To create an unpacked extension for all browser templates, you can run:
 npx gulp buildall
 ```
 
-This will place the built, unpacked extensions into: `./build/VERSION/extension/BROWSER/`
+This will place the built, unpacked extensions into: `build/extension/BROWSER/`
 
 You can then load these folders’ `manifest.json` files into your browser to test them.
 
@@ -73,7 +73,7 @@ This task will create a versioned, zipped version of the browser extension, run:
 npx gulp dist
 ```
 
-The ZIP files will be placed in the folder `./dist/VERSION/BROWSER/hetzblocker-VERSION.zip`
+The ZIP files will be placed in the folder `dist/BROWSER/hetzblocker-VERSION.zip`
 
 # Troubleshooting
 
@@ -85,3 +85,13 @@ cause `libvips` compilation errors.
 
 The solution is to manually install `libvips` as follows: `sudo apt install libvips42`,
 and then running `npm install` again. This should fix the issue.
+
+### Sharp throws “Module did not self-register.” error
+
+This has to do with a different version of Node being used for `npm install` as is used to execute `gulp` tasks.
+
+Usually this is because there’s an old version of Node on you system, and your IDE is not set up to handle the correct on e for the project.
+
+Make sure both installation and execution of the Node modules is done with the same Node version, and you should be fine.
+
+For more info, check out: https://github.com/lovell/sharp/issues/952 
