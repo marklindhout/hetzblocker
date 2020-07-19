@@ -15,7 +15,7 @@ module.exports = {
     `${config.rootFolder}/gulpfile.js`,
     `${config.rootFolder}/node_modules`,
     `${config.buildFolder}`,
-    `${config.distFolder}`,
+    `${config.distFolder}`
   ],
   // coverageProvider: 'babel',
   coverageReporters: ['text', 'lcov'],
@@ -33,5 +33,6 @@ module.exports = {
   ],
   setupFiles: [
     'jest-webextension-mock'
-  ]
+  ],
+  verbose: true
 }

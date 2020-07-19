@@ -2,10 +2,12 @@
 
 module.exports = {
   stripTrailingSlash: function (str) {
-    if (str.endsWith('/')) {
-      str = str.substr(0, str.length - 1);
+    let cleanStr = str
+
+    while (cleanStr.endsWith('/') && cleanStr.length > 1) {
+      cleanStr = cleanStr.substr(0, cleanStr.length - 1)
     }
 
-    return str
+    return cleanStr
   }
 }

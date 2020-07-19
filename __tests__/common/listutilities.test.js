@@ -1,111 +1,144 @@
 const listUtilities = require('../../src/js/common/listutilities.js')
 
-test('getListedPages is defined', function () {
-  expect(listUtilities.getListedPages).not.toBeUndefined()
+describe('Domain normalization', function () {
+  test('normalizeToDomain: Empty url argument', function () {
+    expect(function () { listUtilities.normalizeToDomain('') }).toThrow('No URL string specified')
+  })
+
+  test('normalizeToDomain: Full URLs', function () {
+    expect(listUtilities.normalizeToDomain('https://hetzblocker.test.url.tld/')).toEqual('url.tld')
+    expect(listUtilities.normalizeToDomain('https://hetzblocker.test.url.tld/banana/')).toEqual('url.tld')
+
+    expect(listUtilities.normalizeToDomain('https://another.url.test/')).toEqual('url.test')
+    expect(listUtilities.normalizeToDomain('https://another.url.test/foo/bar')).toEqual('url.test')
+  })
+
+  test('normalizeToDomain: Bare domains', function () {
+    expect(listUtilities.normalizeToDomain('example.test')).toEqual('example.test')
+    expect(listUtilities.normalizeToDomain('sub.example.test')).toEqual('example.test')
+  })
 })
 
-test('getListedDomains is defined', function () {
-  expect(listUtilities.getListedDomains).not.toBeUndefined()
+describe('Domain-based blocking', function () {
+  const blockedDomains = ['url.tld', 'another.test']
+  const nonBlockedDomains = ['notblocked.test', 'also-not-blocked.tld']
+
+  beforeAll(function () {
+    listUtilities.getListedDomains = jest.fn(() => blockedDomains)
+  })
+
+  test('isDomainBlocked: Empty argument', function () {
+    expect(function () { listUtilities.isDomainBlocked('') }).toThrow('No URL string specified')
+  })
+
+  test('isDomainBlocked: Non-matching URLs', function () {
+    expect(listUtilities.isDomainBlocked(nonBlockedDomains[0])).toEqual(false)
+    expect(listUtilities.isDomainBlocked(nonBlockedDomains[1])).toEqual(false)
+  })
+
+  test('isDomainBlocked: Bare domains', function () {
+    expect(listUtilities.isDomainBlocked(blockedDomains[0])).toEqual(true)
+    expect(listUtilities.isDomainBlocked(blockedDomains[1])).toEqual(true)
+  })
+
+  test('isDomainBlocked: Non-protocolled domains', function () {
+    expect(listUtilities.isDomainBlocked('://hetzblocker.test.url.tld')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('://' + blockedDomains[0])).toEqual(true)
+    expect(listUtilities.isDomainBlocked('://' + blockedDomains[0] + '/nonsense?var=val')).toEqual(true)
+  })
+
+  test('isDomainBlocked: Non-SSL domains', function () {
+    expect(listUtilities.isDomainBlocked('http://' + blockedDomains[0])).toEqual(true)
+    expect(listUtilities.isDomainBlocked('http://' + blockedDomains[0] + '/nonsense')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('http://' + blockedDomains[0] + '/nonsense?var=val')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('http://' + blockedDomains[1])).toEqual(true)
+    expect(listUtilities.isDomainBlocked('http://' + blockedDomains[1] + '/nonsense')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('http://' + blockedDomains[1] + '/nonsense?var=val')).toEqual(true)
+  })
+
+  test('isDomainBlocked: SSL domains', function () {
+    expect(listUtilities.isDomainBlocked('https://' + 'hetzblocker.test.url.tld')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[0])).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[0] + '/nonsense')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[0] + '/nonsense?var=val')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[1])).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[1] + '/nonsense')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[1] + '/nonsense?var=val')).toEqual(true)
+  })
+
+  test('isDomainBlocked: Subdomains', function () {
+    expect(listUtilities.isDomainBlocked('https://sudom.' + blockedDomains[0])).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://sudom.' + blockedDomains[1])).toEqual(true)
+  })
+
+  test('isDomainBlocked: Query vars', function () {
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[0] + '/?var=val')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[1] + '/?var=val')).toEqual(true)
+
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[0] + '/?var=val&another=variable&a[]=1&a[]=2')).toEqual(true)
+    expect(listUtilities.isDomainBlocked('https://' + blockedDomains[1] + '/?var=val&another=variable&a[]=1&a[]=2')).toEqual(true)
+  })
 })
 
-test('Domain list contains bild.de', function () {
-  const dl = listUtilities.getListedDomains()
+describe('URL-based blocking', function () {
+  const blockedPages = ['http://facebook.com.test/hetzblocker.blocked', 'https://twitter.com.test/hetzblocker.alsoblocked']
+  const nonBlockedPages = ['http://facebook.com.test/hetzblocker.open', 'https://twitter.com.test/hetzblocker.noproblem']
 
-  expect(dl).toContain('bild.de')
-})
+  beforeAll(function () {
+    listUtilities.getListedPages = jest.fn(() => blockedPages)
+  })
 
-test('normalizeToDomain', function () {
-  // Empty url argument
-  expect(function () { listUtilities.normalizeToDomain('') }).toThrow('No URL string specified')
+  test('isPageBlocked: Empty argument', function () {
+    expect(function () { listUtilities.isPageBlocked('') }).toThrow('No URL string specified')
+  })
 
-  // Full URLs
-  expect(listUtilities.normalizeToDomain('https://www.google.com/')).toEqual('google.com')
-  expect(listUtilities.normalizeToDomain('https://sub.example.com/')).toEqual('example.com')
+  test('isPageBlocked: Strange URLs', function () {
+    expect(listUtilities.isPageBlocked('/')).toEqual(false)
+  })
 
-  // Bare domains
-  expect(listUtilities.normalizeToDomain('example.com')).toEqual('example.com')
-  expect(listUtilities.normalizeToDomain('sub.example.com')).toEqual('example.com')
-})
+  test('isPageBlocked: Non-blocked pages', function () {
+    expect(listUtilities.isPageBlocked(nonBlockedPages[0])).toEqual(false)
+    expect(listUtilities.isPageBlocked(nonBlockedPages[0] + '/')).toEqual(false)
 
-test('isDomainBlocked', function () {
-  // Empty argument
-  expect(function () { listUtilities.isDomainBlocked('') }).toThrow('No URL string specified')
+    expect(listUtilities.isPageBlocked(nonBlockedPages[1])).toEqual(false)
+    expect(listUtilities.isPageBlocked(nonBlockedPages[1] + '/')).toEqual(false)
+  })
 
-  // Non-matching URLSs
-  expect(listUtilities.isDomainBlocked('https://www.google.com/')).toEqual(false)
-  expect(listUtilities.isDomainBlocked('https://lorelle.wordpress.com/')).toEqual(false)
+  test('isPageBlocked: Blocked pages', function () {
+    expect(listUtilities.isPageBlocked(blockedPages[0])).toEqual(true)
+    expect(listUtilities.isPageBlocked(blockedPages[0] + '/')).toEqual(true)
 
-  // Bare domains
-  expect(listUtilities.isDomainBlocked('bild.de')).toEqual(true)
-  expect(listUtilities.isDomainBlocked('welt.de')).toEqual(true)
+    expect(listUtilities.isPageBlocked(blockedPages[1])).toEqual(true)
+    expect(listUtilities.isPageBlocked(blockedPages[1] + '/')).toEqual(true)
+  })
 
-  // Non-protocolled domains
-  expect(listUtilities.isDomainBlocked('://bild.de')).toEqual(true)
-  expect(listUtilities.isDomainBlocked('://bild.de/nonsense?var=val')).toEqual(true)
+  test('isUrlBlocked: Empty url argument', function () {
+    expect(function () { listUtilities.isUrlBlocked('') }).toThrow('No URL string specified')
+  })
 
-  // Non-SSL domains
-  expect(listUtilities.isDomainBlocked('http://bild.de')).toEqual(true)
-  expect(listUtilities.isDomainBlocked('http://bild.de/nonsense')).toEqual(true)
-  expect(listUtilities.isDomainBlocked('http://bild.de/nonsense?var=val')).toEqual(true)
+  test('isUrlBlocked: Non-Blocked pages', function () {
+    expect(listUtilities.isUrlBlocked(nonBlockedPages[0])).toEqual(false)
+    expect(listUtilities.isUrlBlocked(nonBlockedPages[0] + '/')).toEqual(false)
 
-  // SSL domains
-  expect(listUtilities.isDomainBlocked('https://bild.de')).toEqual(true)
-  expect(listUtilities.isDomainBlocked('https://bild.de/nonsense')).toEqual(true)
-  expect(listUtilities.isDomainBlocked('https://bild.de/nonsense?var=val')).toEqual(true)
+    expect(listUtilities.isUrlBlocked(nonBlockedPages[1])).toEqual(false)
+    expect(listUtilities.isUrlBlocked(nonBlockedPages[1] + '/')).toEqual(false)
+  })
 
-  // Subdomains
-  expect(listUtilities.isDomainBlocked('https://sport.bild.de')).toEqual(true)
-  expect(listUtilities.isDomainBlocked('https://whatever.bild.de')).toEqual(true)
+  test('isUrlBlocked: Blocked pages', function () {
+    expect(listUtilities.isUrlBlocked(blockedPages[0])).toEqual(true)
+    expect(listUtilities.isUrlBlocked(blockedPages[0] + '/')).toEqual(true)
 
-  // Query vars
-  expect(listUtilities.isDomainBlocked('https://bild.de/?var=val')).toEqual(true)
-  expect(listUtilities.isDomainBlocked('https://bild.de/?var=val&another=variable&a[]=1&a[]=2')).toEqual(true)
-})
+    expect(listUtilities.isUrlBlocked(blockedPages[1])).toEqual(true)
+    expect(listUtilities.isUrlBlocked(blockedPages[1] + '/')).toEqual(true)
+  })
 
-test('isPageBlocked', function () {
-  // Empty argument
-  expect(function () { listUtilities.isPageBlocked('') }).toThrow('No URL string specified')
+  test('isUrlBlocked: Local paths', function () {
+    expect(listUtilities.isUrlBlocked('.')).toEqual(false)
+    expect(listUtilities.isUrlBlocked('../../././')).toEqual(false)
+    expect(listUtilities.isUrlBlocked('a')).toEqual(false)
+  })
 
-  // Strange URLs
-  expect(listUtilities.isPageBlocked('/')).toEqual(false)
-
-  // Non-blocked pages
-  expect(listUtilities.isPageBlocked('https://www.google.com/')).toEqual(false)
-  expect(listUtilities.isPageBlocked('http://google.com')).toEqual(false)
-  expect(listUtilities.isPageBlocked('https://lorelle.wordpress.com/')).toEqual(false)
-  expect(listUtilities.isPageBlocked('https://lorelle.wordpress.com/2009/04/08/example-of-a-perfect-personal-blog/')).toEqual(false)
-  expect(listUtilities.isPageBlocked('https://twitter.com/BVG_Kampagne')).toEqual(false)
-
-  // Blocked pages
-  expect(listUtilities.isPageBlocked('http://facebook.com/bild')).toEqual(true) // no trailing slash
-  expect(listUtilities.isPageBlocked('http://facebook.com/bild/')).toEqual(true)
-  expect(listUtilities.isPageBlocked('https://twitter.com/bild')).toEqual(true) // no trailing slash
-  expect(listUtilities.isPageBlocked('https://twitter.com/bild/')).toEqual(true)
-})
-
-test('isUrlBlocked', function () {
-  // Empty url argument
-  expect(function () { listUtilities.isUrlBlocked('') }).toThrow('No URL string specified')
-
-  // Non-Blocked pages
-  expect(listUtilities.isUrlBlocked('https://www.google.com/')).toEqual(false)
-  expect(listUtilities.isUrlBlocked('http://google.com')).toEqual(false)
-  expect(listUtilities.isUrlBlocked('https://lorelle.wordpress.com/')).toEqual(false)
-  expect(listUtilities.isUrlBlocked('https://lorelle.wordpress.com/2009/04/08/example-of-a-perfect-personal-blog/')).toEqual(false)
-  expect(listUtilities.isUrlBlocked('https://twitter.com/BVG_Kampagne')).toEqual(false)
-
-  // Blocked pages
-  expect(listUtilities.isUrlBlocked('http://facebook.com/bild')).toEqual(true) // no trailing slash
-  expect(listUtilities.isUrlBlocked('http://facebook.com/bild/')).toEqual(true)
-  expect(listUtilities.isUrlBlocked('https://twitter.com/bild')).toEqual(true) // no trailing slash
-  expect(listUtilities.isUrlBlocked('https://twitter.com/bild/')).toEqual(true)
-
-  // Local paths
-  expect(listUtilities.isUrlBlocked('.')).toEqual(false)
-  expect(listUtilities.isUrlBlocked('../../././')).toEqual(false)
-
-  expect(listUtilities.isUrlBlocked('a')).toEqual(false)
-
-  // Erroneous URLs
-  expect(listUtilities.isUrlBlocked('ößäñ')).toEqual(false)
+  test('isUrlBlocked: Erroneous URLs', function () {
+    expect(listUtilities.isUrlBlocked('ößäñ')).toEqual(false)
+  })
 })
