@@ -1,9 +1,10 @@
 'use strict'
 
-var utilities = require('./utilities.js')
-var browserButton = require('./browserbutton.js')
-var listUtilities = require('../common/listutilities.js')
-var browser = require('webextension-polyfill')
+const utilities = require('./utilities.js')
+const browserButton = require('./browserbutton.js')
+const listUtilities = require('../common/listutilities.js')
+const config = require('../common/config.js')
+const browser = require('webextension-polyfill')
 
 module.exports = {
   /**
@@ -11,36 +12,42 @@ module.exports = {
    */
 
   addRequestListener: function () {
-    browser.webRequest.onBeforeRequest.addListener(
-      this.checkUrlListingStatus.bind(this), { urls: ['<all_urls>'] }, ['blocking'])
+    browser.webRequest.onBeforeRequest.addListener(this.checkUrlListingStatus.bind(this), { urls: ['<all_urls>'] }, ['blocking'])
   },
 
   /**
    * Check a domain's listing status
    *
-   * @param {String} details - The request details object.
+   * @param {Object} details - The request details object.
    */
 
   checkUrlListingStatus: function (details) {
-    var url = details.url
-
-    if (listUtilities.isUrlBlocked(url)) {
-      browserButton.setBrowserButtonState('blocked')
-      return this.redirectToBlockMessagePage()
+    if (listUtilities.isUrlBlocked(details.url)) {
+      browserButton.setBrowserButtonState(config.state.BLOCKED, details.tabId)
+      return this.redirectToBlockMessagePage(details)
     }
   },
 
   /**
    * Redirection to the blocked message page
+   *
+   * @param {Object} details - Request details object.
    */
 
-  redirectToBlockMessagePage: function () {
-    var locale = utilities.getSimplifiedBrowserLocale()
-    var blockMessageUrl = browser.extension.getURL(
+  redirectToBlockMessagePage: function (details) {
+    const locale = utilities.getSimplifiedBrowserLocale()
+    const blockMessageUrl = browser.extension.getURL(
       'data/html/block_' + locale + '.html')
+    let blockUrl = ''
+    let blockReason = ''
+
+    if (details && details.url) {
+      blockUrl = details.url
+      blockReason = listUtilities.retrieveBlockReasonForUrl(details.url)
+    }
 
     return {
-      redirectUrl: blockMessageUrl
+      redirectUrl: `${blockMessageUrl}?blockUrl=${blockUrl}&blockReason=${blockReason}`
     }
   }
 

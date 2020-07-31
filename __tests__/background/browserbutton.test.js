@@ -29,41 +29,41 @@ describe('State Helper Functions', function () {
   test('isValidState: Correct type, wrong string', function () {
     expect(bb.isValidState('lorem ipsum dolor sit amet')).toEqual(false)
     expect(bb.isValidState(' ')).toEqual(false)
-    expect(bb.isValidState(' blocked ')).toEqual(false)
+    expect(bb.isValidState(` ${config.state.BLOCKED} `)).toEqual(false)
   })
 
   test('isValidState: Correct argument', function () {
-    expect(bb.isValidState('blocked')).toEqual(true)
-    expect(bb.isValidState('warning')).toEqual(true)
-    expect(bb.isValidState('success')).toEqual(true)
-    expect(bb.isValidState('default')).toEqual(true)
+    expect(bb.isValidState(config.state.BLOCKED)).toEqual(true)
+    expect(bb.isValidState(config.state.WARNING)).toEqual(true)
+    expect(bb.isValidState(config.state.SUCCESS)).toEqual(true)
+    expect(bb.isValidState(config.state.DEFAULT)).toEqual(true)
   })
 
   test('normalizeStateArg: No arguments', function () {
-    expect(bb.normalizeStateArg()).toEqual('default')
+    expect(bb.normalizeStateArg()).toEqual(config.state.DEFAULT)
   })
 
   test('normalizeStateArg: Invalid arguments', function () {
-    expect(bb.normalizeStateArg(undefined)).toEqual('default')
-    expect(bb.normalizeStateArg(true)).toEqual('default')
-    expect(bb.normalizeStateArg(false)).toEqual('default')
-    expect(bb.normalizeStateArg([])).toEqual('default')
-    expect(bb.normalizeStateArg({})).toEqual('default')
-    expect(bb.normalizeStateArg(12124123)).toEqual('default')
-    expect(bb.normalizeStateArg(3.14127)).toEqual('default')
+    expect(bb.normalizeStateArg(undefined)).toEqual(config.state.DEFAULT)
+    expect(bb.normalizeStateArg(true)).toEqual(config.state.DEFAULT)
+    expect(bb.normalizeStateArg(false)).toEqual(config.state.DEFAULT)
+    expect(bb.normalizeStateArg([])).toEqual(config.state.DEFAULT)
+    expect(bb.normalizeStateArg({})).toEqual(config.state.DEFAULT)
+    expect(bb.normalizeStateArg(12124123)).toEqual(config.state.DEFAULT)
+    expect(bb.normalizeStateArg(3.14127)).toEqual(config.state.DEFAULT)
   })
 
   test('normalizeStateArg: Correct type, wrong string', function () {
-    expect(bb.normalizeStateArg('lorem ipsum dolor sit amet')).toEqual('default')
-    expect(bb.normalizeStateArg(' ')).toEqual('default')
-    expect(bb.normalizeStateArg(' blocked ')).toEqual('default')
+    expect(bb.normalizeStateArg('lorem ipsum dolor sit amet')).toEqual(config.state.DEFAULT)
+    expect(bb.normalizeStateArg(' ')).toEqual(config.state.DEFAULT)
+    expect(bb.normalizeStateArg(' blocked ')).toEqual(config.state.DEFAULT)
   })
 
   test('normalizeStateArg: Correct argument', function () {
-    expect(bb.normalizeStateArg('blocked')).toEqual('blocked')
-    expect(bb.normalizeStateArg('warning')).toEqual('warning')
-    expect(bb.normalizeStateArg('success')).toEqual('success')
-    expect(bb.normalizeStateArg('default')).toEqual('default')
+    expect(bb.normalizeStateArg(config.state.BLOCKED)).toEqual(config.state.BLOCKED)
+    expect(bb.normalizeStateArg(config.state.WARNING)).toEqual(config.state.WARNING)
+    expect(bb.normalizeStateArg(config.state.SUCCESS)).toEqual(config.state.SUCCESS)
+    expect(bb.normalizeStateArg(config.state.DEFAULT)).toEqual(config.state.DEFAULT)
   })
 })
 
@@ -71,25 +71,31 @@ describe('Browser Button: State', function () {
   beforeAll(function () {
     bb.setBrowserButtonIcon = jest.fn(bb.setBrowserButtonIcon)
     bb.setBrowserButtonTitle = jest.fn(bb.setBrowserButtonTitle)
+    bb.setBrowserBadgeText = jest.fn(bb.setBrowserBadgeText)
   })
 
   test('setBrowserButtonState: Without argument', function () {
     bb.setBrowserButtonState()
-    expect(bb.setBrowserButtonIcon).toHaveBeenCalledWith(undefined)
-    expect(bb.setBrowserButtonTitle).toHaveBeenCalledWith(undefined)
+    expect(bb.setBrowserButtonIcon).toHaveBeenCalledWith(config.state.DEFAULT, undefined, undefined)
+    expect(bb.setBrowserButtonTitle).toHaveBeenCalledWith(config.state.DEFAULT, undefined, undefined)
   })
 
   test('setBrowserButtonState: Default argument', function () {
-    // 'default' argument
-    bb.setBrowserButtonState('default')
-    expect(bb.setBrowserButtonIcon).toHaveBeenCalledWith('default')
-    expect(bb.setBrowserButtonTitle).toHaveBeenCalledWith('default')
+    bb.setBrowserButtonState(config.state.DEFAULT, 11, 23)
+    expect(bb.setBrowserButtonIcon).toHaveBeenCalledWith(config.state.DEFAULT, 11, 23)
+    expect(bb.setBrowserButtonTitle).toHaveBeenCalledWith(config.state.DEFAULT, 11, 23)
   })
 
   test('setBrowserButtonState: Other argument', function () {
-    bb.setBrowserButtonState('lorem ipsum sit amet')
-    expect(bb.setBrowserButtonIcon).toHaveBeenCalledWith('lorem ipsum sit amet')
-    expect(bb.setBrowserButtonTitle).toHaveBeenCalledWith('lorem ipsum sit amet')
+    bb.setBrowserButtonState('lorem ipsum sit amet', 11, {bla: 23})
+    expect(bb.setBrowserButtonIcon).toHaveBeenCalledWith(config.state.DEFAULT, 11, {bla: 23})
+    expect(bb.setBrowserButtonTitle).toHaveBeenCalledWith(config.state.DEFAULT, 11, {bla: 23})
+  })
+
+  test('setBrowserButtonState: With data object argument', function () {
+    const dataObj = {data: {amount: 12765}}
+    bb.setBrowserButtonState(config.state.WARNING, 11, dataObj)
+    expect(bb.setBrowserBadgeText).toHaveBeenCalledWith('12765', 11)
   })
 })
 
@@ -111,22 +117,22 @@ describe('Browser Button: Title', function () {
     expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_default.message}` })
   })
   test('setBrowserButtonTitle: States', function () {
-    bb.setBrowserButtonTitle('default')
+    bb.setBrowserButtonTitle(config.state.DEFAULT)
     expect(browser.browserAction.setTitle).toHaveBeenCalled()
     expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_default')
     expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_default.message}` })
 
-    bb.setBrowserButtonTitle('blocked')
+    bb.setBrowserButtonTitle(config.state.BLOCKED)
     expect(browser.browserAction.setTitle).toHaveBeenCalled()
     expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_blocked')
     expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_blocked.message}` })
 
-    bb.setBrowserButtonTitle('warning')
+    bb.setBrowserButtonTitle(config.state.WARNING)
     expect(browser.browserAction.setTitle).toHaveBeenCalled()
     expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_warning')
     expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_warning.message}` })
 
-    bb.setBrowserButtonTitle('success')
+    bb.setBrowserButtonTitle(config.state.SUCCESS)
     expect(browser.browserAction.setTitle).toHaveBeenCalled()
     expect(browser.i18n.getMessage).toHaveBeenCalledWith('browserButtonMessageState_success')
     expect(browser.browserAction.setTitle).toHaveBeenCalledWith({ title: `${trans.extensionName.message} — ${trans.browserButtonMessageState_success.message}` })
@@ -193,16 +199,16 @@ describe('Browser Button: Icon', function () {
     bb.setBrowserButtonIcon()
     expect(browser.browserAction.setIcon).toHaveBeenLastCalledWith({ path: paths_default })
 
-    bb.setBrowserButtonIcon('default')
+    bb.setBrowserButtonIcon(config.state.DEFAULT)
     expect(browser.browserAction.setIcon).toHaveBeenLastCalledWith({ path: paths_default })
 
-    bb.setBrowserButtonIcon('blocked')
+    bb.setBrowserButtonIcon(config.state.BLOCKED)
     expect(browser.browserAction.setIcon).toHaveBeenLastCalledWith({ path: paths_blocked })
 
-    bb.setBrowserButtonIcon('warning')
+    bb.setBrowserButtonIcon(config.state.WARNING)
     expect(browser.browserAction.setIcon).toHaveBeenLastCalledWith({ path: paths_warning })
 
-    bb.setBrowserButtonIcon('success')
+    bb.setBrowserButtonIcon(config.state.SUCCESS)
     expect(browser.browserAction.setIcon).toHaveBeenLastCalledWith({ path: paths_success })
   })
 })

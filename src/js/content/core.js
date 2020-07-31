@@ -1,7 +1,6 @@
-'use strict'
-
 const prerequisites = require('./prerequisites.js')
 const listUtilities = require('../common/listutilities.js')
+const message = require('./message.js')
 const config = require('../common/config.js')
 
 module.exports = {
@@ -46,23 +45,34 @@ module.exports = {
   },
 
   /**
+   * Disables a link element by removing all attributes, add a specific class, and removing all event listeners.
+   *
+   * @param linkElement {HTMLElement}
+   */
+
+  disableLinkElement: function (linkElement) {
+    this.removeAllAttributes(linkElement)
+    this.addListedClassToElement(linkElement)
+    this.removeAllEventListeners(linkElement)
+  },
+
+  /**
    * Scans all links within a page for a match to the domain list.
    */
 
   scanAllLinks: function () {
-    var allLinksInDocument = document.querySelectorAll('a')
-    var i = 0
+    const linkElements = document.querySelectorAll('a')
+    const matchedLinks = []
 
-    for (i; i < allLinksInDocument.length; i += 1) {
-      var currentLink = allLinksInDocument[i]
-
-      if (currentLink.href) {
-        if (listUtilities.isUrlBlocked(currentLink.href)) {
-          this.removeAllAttributes(currentLink)
-          this.addListedClassToElement(currentLink)
-          this.removeAllEventListeners(currentLink)
-        }
+    for (let currentLink of linkElements) {
+      if (currentLink.href && listUtilities.isUrlBlocked(currentLink.href)) {
+        this.disableLinkElement(currentLink)
+        matchedLinks.push(currentLink)
       }
+    }
+
+    if (matchedLinks.length > 0) {
+      message.send({ command: 'setBrowserButtonState', data: { state: config.state.WARNING, amount: matchedLinks.length } })
     }
   },
 

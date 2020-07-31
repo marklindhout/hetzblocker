@@ -8,5 +8,11 @@
 
 module.exports = {
   defaultLocale: 'en',
-  listedLinkClassName: 'hetzblocker__ListedLink'
+  listedLinkClassName: 'hetzblocker__ListedLink',
+  state: {
+    WARNING: 'warning',
+    BLOCKED: 'blocked',
+    DEFAULT: 'default',
+    SUCCESS: 'success'
+  }
 }
