@@ -8,10 +8,25 @@ const webExt = require('web-ext')
 const config = require('../project.config.js')
 
 gulp.task('extension:lint:firefox', function () {
-  return webExt.cmd.lint(config.webExtConfigFirefox, {
-    shouldExitProgram: false
-  })
+  const browserConfig = {
+    warningsAsErrors: true,
+    pretty: true,
+    output: 'text'
+  }
+
+  return webExt.cmd.lint({ ...config.webExtConfigFirefox, ...browserConfig }, { shouldExitProgram: false })
     .catch(err => console.error(err))
 })
 
-gulp.task('extension:lint', gulp.parallel('extension:lint:firefox'))
+gulp.task('extension:lint:chrome', function () {
+  const browserConfig = {
+    warningsAsErrors: true,
+    pretty: true,
+    output: 'text'
+  }
+
+  return webExt.cmd.lint({ ...config.webExtConfigChrome, ...browserConfig }, { shouldExitProgram: false })
+    .catch(err => console.error(err))
+})
+
+gulp.task('extension:lint', gulp.parallel('extension:lint:firefox', 'extension:lint:chrome'))

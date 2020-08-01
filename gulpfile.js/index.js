@@ -38,7 +38,6 @@ gulp.task(
   'dist',
   gulp.series(
     'buildall',
-    'extension:lint',
     'extension:build'
   )
 )

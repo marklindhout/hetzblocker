@@ -24,7 +24,6 @@ const webExtConfigFirefox = {
   sourceDir: extensionFolderFirefox,
   artifactsDir: distFolderFirefox,
   overwriteDest: true,
-  warningsAsErrors: true,
   noInput: true
 }
 
@@ -32,7 +31,6 @@ const webExtConfigChrome = {
   sourceDir: extensionFolderChrome,
   artifactsDir: distFolderChrome,
   overwriteDest: true,
-  warningsAsErrors: true,
   noInput: true
 }
 

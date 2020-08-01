@@ -1,1 +1,3 @@
-require('./core.js').init()
+const core = require('./core.js')
+
+core.init()
