@@ -8,9 +8,6 @@ module.exports = {
   send: function (message) {
     // eslint-disable-next-line no-undef
     browser.runtime.sendMessage(message)
-      .catch((err) => {
-        console.error(err)
-      })
   }
 
 }
