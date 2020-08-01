@@ -4,7 +4,7 @@
  */
 
 const gulp = require('gulp')
-const webExt = require('web-ext').default
+const webExt = require('web-ext')
 const config = require('../project.config.js')
 
 gulp.task('extension:run:firefox', function () {
