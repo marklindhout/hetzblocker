@@ -142,3 +142,73 @@ describe('URL-based blocking', function () {
     expect(listUtilities.isUrlBlocked('ößäñ')).toEqual(false)
   })
 })
+
+describe('Block reason key retrieval for pages', function () {
+  const blockedPages = ['http://facebook.com.test/hetzblocker.blocked', 'https://twitter.com.test/hetzblocker.alsoblocked']
+  const nonBlockedPages = ['http://facebook.com.test/hetzblocker.open', 'https://twitter.com.test/hetzblocker.noproblem']
+
+  beforeAll(function () {
+    listUtilities.getListedPages = jest.fn(() => blockedPages)
+  })
+
+  test('retrieveBlockReasonForPage: Blocked pages', function () {
+    expect(listUtilities.retrieveBlockReasonForPage(blockedPages[0])).toEqual('page_block_explanatory_reason_string')
+    expect(listUtilities.retrieveBlockReasonForPage(blockedPages[1])).toEqual('page_block_explanatory_reason_string')
+  })
+
+  test('retrieveBlockReasonForPage: Non-blocked pages', function () {
+    expect(listUtilities.retrieveBlockReasonForPage(nonBlockedPages[0])).toEqual(null)
+    expect(listUtilities.retrieveBlockReasonForPage(nonBlockedPages[1])).toEqual(null)
+  })
+})
+
+describe('Block reason key retrieval for domains', function () {
+  const blockedDomains = ['url.tld', 'another.test']
+  const nonBlockedDomains = ['notblocked.test', 'also-not-blocked.tld']
+
+  beforeAll(function () {
+    listUtilities.getListedDomains = jest.fn(() => blockedDomains)
+  })
+
+  test('retrieveBlockReasonForUrl: Blocked domains', function () {
+    expect(listUtilities.retrieveBlockReasonForDomain(blockedDomains[0])).toEqual('domain_block_explanatory_reason_string')
+    expect(listUtilities.retrieveBlockReasonForDomain(blockedDomains[1])).toEqual('domain_block_explanatory_reason_string')
+  })
+
+  test('retrieveBlockReasonForDomain: Non-blocked domains', function () {
+    expect(listUtilities.retrieveBlockReasonForDomain(nonBlockedDomains[0])).toEqual(null)
+    expect(listUtilities.retrieveBlockReasonForDomain(nonBlockedDomains[1])).toEqual(null)
+  })
+})
+
+describe('Block reason key retrieval for generic URLs', function () {
+  const blockedPages = ['http://facebook.com.test/hetzblocker.blocked', 'https://twitter.com.test/hetzblocker.alsoblocked']
+  const nonBlockedPages = ['http://facebook.com.test/hetzblocker.open', 'https://twitter.com.test/hetzblocker.noproblem']
+  const blockedDomains = ['url.tld', 'another.test']
+  const nonBlockedDomains = ['notblocked.test', 'also-not-blocked.tld']
+
+  beforeAll(function () {
+    listUtilities.getListedPages = jest.fn(() => blockedPages)
+    listUtilities.getListedDomains = jest.fn(() => blockedDomains)
+  })
+
+  test('retrieveBlockReasonForUrl: Blocked pages', function () {
+    expect(listUtilities.retrieveBlockReasonForUrl(blockedPages[0])).toEqual('page_block_explanatory_reason_string')
+    expect(listUtilities.retrieveBlockReasonForUrl(blockedPages[1])).toEqual('page_block_explanatory_reason_string')
+  })
+
+  test('retrieveBlockReasonForUrl: Non-blocked pages', function () {
+    expect(listUtilities.retrieveBlockReasonForUrl(nonBlockedPages[0])).toEqual(null)
+    expect(listUtilities.retrieveBlockReasonForUrl(nonBlockedPages[1])).toEqual(null)
+  })
+
+  test('retrieveBlockReasonForUrl: Blocked domains', function () {
+    expect(listUtilities.retrieveBlockReasonForUrl(blockedDomains[0])).toEqual('domain_block_explanatory_reason_string')
+    expect(listUtilities.retrieveBlockReasonForUrl(blockedDomains[1])).toEqual('domain_block_explanatory_reason_string')
+  })
+
+  test('retrieveBlockReasonForUrl: Non-blocked domains', function () {
+    expect(listUtilities.retrieveBlockReasonForUrl(nonBlockedDomains[0])).toEqual(null)
+    expect(listUtilities.retrieveBlockReasonForUrl(nonBlockedDomains[1])).toEqual(null)
+  })
+})

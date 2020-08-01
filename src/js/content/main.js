@@ -1,11 +1,3 @@
-'use strict'
+const core = require('./core.js')
 
-/*!
- * {{ pkg.slug }} - {{ pkg.description }} ({{ buildNumber }})
- * @version {{ pkg.version }}
- * @link {{ pkg.url }}
- * @copyright {{ pkg.copyright }}
- * @license {{ pkg.license }}
- */
-
-require('./core.js').init()
+core.init()

@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
   /**
    * Loads the appropriate object into window.browser to allow transparent development

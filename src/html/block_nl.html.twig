@@ -1,17 +1,26 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Deze website is geblokkeerd</title>
-    <link media="all" rel="stylesheet" href="../css/block.css" />
-    {% include 'partials/favicons.html.twig' with {'state': 'blocked'} %}
-  </head>
-  <body>
-    <div id="extensionPage">
-      {% include 'partials/large_icon.html.twig' with {'state': 'blocked'} %}
-      <h1 class="pageHeading">Deze website is geblokkeerd</h1>
-      <p>Je bezoek aan deze website is geblokkeerd door de <em>Hetzblocker</em>-extensie.</p>
-      <p>Er is géén informatie verstuurd naar de opgevraagde website.</p>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Deze website is geblokkeerd</title>
+  <link media="all" rel="stylesheet" href="../css/block.css"/>
+  {% include 'partials/favicons.html.twig' with {'state': 'blocked'} %}
+</head>
+<body>
+<div id="extensionPage">
+  {% include 'partials/large_icon.html.twig' with {'state': 'blocked'} %}
+  <h1 class="pageHeading">Deze website is geblokkeerd</h1>
+  <p>Je bezoek aan deze website is geblokkeerd door de <em>Hetzblocker</em>-extensie.</p>
+  <p>Er is géén informatie verstuurd naar de opgevraagde website.</p>
+
+  <dl class="blockDetails">
+    <dt>Geblokkeerd adres (URL):</dt>
+    <dd id="blockUrl"></dd>
+    <dt>Reden van deze blokkade:</dt>
+    <dd id="blockReason"></dd>
+  </dl>
+</div>
+
+<script src="../js/extensionPage_block.js"></script>
+</body>
 </html>

@@ -18,8 +18,8 @@ describe('URL Listing Status', function () {
   })
 
   test('checkUrlListingStatus: Blocked URL', function () {
-    expect(request.checkUrlListingStatus({ url: blockedPages[0] })).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html` })
-    expect(request.checkUrlListingStatus({ url: blockedPages[1] })).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html` })
+    expect(request.checkUrlListingStatus({ url: blockedPages[0] })).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html?blockUrl=${blockedPages[0]}&blockReason=page_block_explanatory_reason_string` })
+    expect(request.checkUrlListingStatus({ url: blockedPages[1] })).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html?blockUrl=${blockedPages[1]}&blockReason=page_block_explanatory_reason_string` })
   })
 })
 
@@ -39,13 +39,13 @@ describe('Domain Listing Status', function () {
   })
 
   test('checkUrlListingStatus: Blocked domains', function () {
-    expect(request.checkUrlListingStatus({ url: blockedDomains[0] })).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html` })
-    expect(request.checkUrlListingStatus({ url: blockedDomains[1] })).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html` })
+    expect(request.checkUrlListingStatus({ url: blockedDomains[0] })).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html?blockUrl=${blockedDomains[0]}&blockReason=domain_block_explanatory_reason_string` })
+    expect(request.checkUrlListingStatus({ url: blockedDomains[1] })).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html?blockUrl=${blockedDomains[1]}&blockReason=domain_block_explanatory_reason_string` })
   })
 })
 
 describe('Redirection Response', function () {
   test('redirectToBlockMessagePage', function () {
-    expect(request.redirectToBlockMessagePage()).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html` })
+    expect(request.redirectToBlockMessagePage()).toEqual({ redirectUrl: `data/html/block_${config.defaultLocale}.html?blockUrl=&blockReason=` })
   })
 })

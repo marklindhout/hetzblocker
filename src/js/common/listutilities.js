@@ -58,15 +58,10 @@ module.exports = {
 
     const domain = this.normalizeToDomain(url)
     const list = this.getListedDomains()
-    let i = list.length - 1
 
-    if (domain) {
-      while (i >= 0) {
-        if (list[i] === domain) {
-          return true
-        }
-
-        i -= 1
+    for (let entry of list) {
+      if (entry === domain) {
+        return true
       }
     }
 
@@ -85,21 +80,80 @@ module.exports = {
 
     var currentUri = new URI(utilities.stripTrailingSlash(url))
     var list = this.getListedPages()
-    var i = list.length - 1
 
-    while (i >= 0) {
-      var listingUri = new URI(utilities.stripTrailingSlash(list[i]))
+    for (let entry of list) {
+      var listingUri = new URI(utilities.stripTrailingSlash(entry))
 
       if (currentUri.subdomain() === listingUri.subdomain() &&
         currentUri.domain() === listingUri.domain() &&
         currentUri.pathname() === listingUri.pathname()) {
         return true
       }
-
-      i -= 1
     }
 
     return false
+  },
+
+  /**
+   * Returns a block reason key retrieved from the relevant entry in the domain list.
+   *
+   * @param url {String}
+   * @returns {String} - Block reason key
+   */
+
+  retrieveBlockReasonForDomain: function (url) {
+    const domain = this.normalizeToDomain(url)
+    const list = this.getListedDomains()
+
+    for (let entry of list) {
+      if (entry === domain) {
+        return entry.reason || 'domain_block_explanatory_reason_string'
+      }
+    }
+
+    return null
+  },
+
+  /**
+   * Returns a block reason key retrieved from the relevant entry in the domain list.
+   *
+   * @param url {String}
+   * @returns {String} - Block reason key
+   */
+
+  retrieveBlockReasonForPage: function (url) {
+    var currentUri = new URI(utilities.stripTrailingSlash(url))
+    var list = this.getListedPages()
+
+    for (let entry of list) {
+      var listingUri = new URI(utilities.stripTrailingSlash(entry))
+
+      if (currentUri.subdomain() === listingUri.subdomain() &&
+        currentUri.domain() === listingUri.domain() &&
+        currentUri.pathname() === listingUri.pathname()) {
+        return entry.reason || 'page_block_explanatory_reason_string'
+      }
+    }
+
+    return null
+  },
+
+  /**
+   * Returns a reason, retrieved from the relevant entry, as to why this URL is blocked.
+   *
+   * @param url {String}
+   */
+
+  retrieveBlockReasonForUrl: function (url) {
+    if (!url) { throw new Error('No URL string specified.') }
+
+    if (this.isDomainBlocked(url)) {
+      return this.retrieveBlockReasonForDomain(url)
+    } else if (this.isPageBlocked(url)) {
+      return this.retrieveBlockReasonForPage(url)
+    }
+
+    return null
   },
 
   /**

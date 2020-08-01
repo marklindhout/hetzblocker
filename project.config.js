@@ -12,6 +12,7 @@ const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json')))
 const rootFolder = root
 const sourceFolder = path.join(root, 'src')
 const testsFolder = path.join(root, '__tests__')
+const coverageFolder = path.join(root, 'coverage')
 const buildFolder = path.join(root, 'build')
 const distFolder = path.join(root, 'dist')
 const distFolderFirefox = path.join(distFolder, 'firefox')
@@ -24,20 +25,21 @@ const webExtConfigFirefox = {
   sourceDir: extensionFolderFirefox,
   artifactsDir: distFolderFirefox,
   overwriteDest: true,
-  warningsAsErrors: true
+  noInput: true
 }
 
 const webExtConfigChrome = {
   sourceDir: extensionFolderChrome,
   artifactsDir: distFolderChrome,
   overwriteDest: true,
-  warningsAsErrors: true
+  noInput: true
 }
 
 module.exports = {
   rootFolder,
   sourceFolder,
   testsFolder,
+  coverageFolder,
   buildFolder,
   distFolder,
   extensionFolder,
