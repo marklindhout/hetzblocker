@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "browserify": "^16.5.1",
-    "del": "^4.1.1",
+    "del": "^5.1.0",
     "documentation": "^9.3.1",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",

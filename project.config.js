@@ -12,6 +12,7 @@ const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json')))
 const rootFolder = root
 const sourceFolder = path.join(root, 'src')
 const testsFolder = path.join(root, '__tests__')
+const coverageFolder = path.join(root, 'coverage')
 const buildFolder = path.join(root, 'build')
 const distFolder = path.join(root, 'dist')
 const distFolderFirefox = path.join(distFolder, 'firefox')
@@ -38,6 +39,7 @@ module.exports = {
   rootFolder,
   sourceFolder,
   testsFolder,
+  coverageFolder,
   buildFolder,
   distFolder,
   extensionFolder,
