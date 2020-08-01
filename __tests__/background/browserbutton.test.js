@@ -71,7 +71,7 @@ describe('Browser Button: State', function () {
   beforeAll(function () {
     bb.setBrowserButtonIcon = jest.fn(bb.setBrowserButtonIcon)
     bb.setBrowserButtonTitle = jest.fn(bb.setBrowserButtonTitle)
-    bb.setBrowserBadgeText = jest.fn(bb.setBrowserBadgeText)
+    bb.setBrowserButtonBadgeText = jest.fn(bb.setBrowserButtonBadgeText)
   })
 
   test('setBrowserButtonState: Without argument', function () {
@@ -95,7 +95,7 @@ describe('Browser Button: State', function () {
   test('setBrowserButtonState: With data object argument', function () {
     const dataObj = {data: {amount: 12765}}
     bb.setBrowserButtonState(config.state.WARNING, 11, dataObj)
-    expect(bb.setBrowserBadgeText).toHaveBeenCalledWith('12765', 11)
+    expect(bb.setBrowserButtonBadgeText).toHaveBeenCalledWith('12765', 11)
   })
 })
 
@@ -105,7 +105,7 @@ describe('Browser Button: Badge', function () {
     const str = 'banana'
     browser.browserAction.setBadgeText = jest.fn()
 
-    bb.setBrowserBadgeText(str)
+    bb.setBrowserButtonBadgeText(str)
     expect(browser.browserAction.setBadgeText).toHaveBeenCalledWith({ text: str })
   })
 })

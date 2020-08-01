@@ -43,6 +43,29 @@ module.exports = {
   },
 
   /**
+   * Set the action button badge color.
+   *
+   * @param {String} state - The state, indicating the preconfigured color.
+   * @param {String} tabId - The tab ID to set this for.
+   *
+   */
+
+  setBrowserButtonBadgeColor: function (state, tabId) {
+    const ns = this.normalizeStateArg(state)
+    let badgeBackgroundColor = config.state.DEFAULT_BADGE_BG_COLOR
+
+    if (ns === config.state.SUCCESS) {
+      badgeBackgroundColor = config.state.SUCCESS_BADGE_BG_COLOR
+    } else if (ns === config.state.WARNING) {
+      badgeBackgroundColor = config.state.WARNING_BADGE_BG_COLOR
+    } else if (ns === config.state.BLOCKED) {
+      badgeBackgroundColor = config.state.BLOCKED_BADGE_BG_COLOR
+    }
+
+    browser.browserAction.setBadgeBackgroundColor({ color: badgeBackgroundColor, tabId: tabId })
+  },
+
+  /**
    * Set the badge text on the browser action button
    *
    * @param {String} text - The badge text
@@ -50,7 +73,7 @@ module.exports = {
    *
    */
 
-  setBrowserBadgeText: function (text, tabId) {
+  setBrowserButtonBadgeText: function (text, tabId) {
     browser.browserAction.setBadgeText({ text: text, tabId: tabId })
   },
 
@@ -81,19 +104,12 @@ module.exports = {
    */
 
   setBrowserButtonIcon: function (state, tabId) {
-    var ns = this.normalizeStateArg(state)
+    const ns = this.normalizeStateArg(state)
 
-    var paths = {
-      '512': browser.extension.getURL('data/icon/icon_' + ns + '_512.png'),
-      '256': browser.extension.getURL('data/icon/icon_' + ns + '_256.png'),
-      '128': browser.extension.getURL('data/icon/icon_' + ns + '_128.png'),
-      '96': browser.extension.getURL('data/icon/icon_' + ns + '_96.png'),
-      '64': browser.extension.getURL('data/icon/icon_' + ns + '_64.png'),
-      '48': browser.extension.getURL('data/icon/icon_' + ns + '_48.png'),
-      '32': browser.extension.getURL('data/icon/icon_' + ns + '_32.png'),
-      '24': browser.extension.getURL('data/icon/icon_' + ns + '_24.png'),
-      '19': browser.extension.getURL('data/icon/icon_' + ns + '_19.png'),
-      '16': browser.extension.getURL('data/icon/icon_' + ns + '_16.png')
+    const paths = {}
+
+    for (let size of config.iconSizes) {
+      paths[`${size}`] = browser.extension.getURL(`data/icon/icon_${ns}_${size}.png`)
     }
 
     browser.browserAction.setIcon({
@@ -115,10 +131,11 @@ module.exports = {
 
     this.setBrowserButtonIcon(ns, tabId, dataObject)
     this.setBrowserButtonTitle(ns, tabId, dataObject)
+    this.setBrowserButtonBadgeColor(ns, tabId)
 
     if (ns === config.state.WARNING && dataObject) {
       const text = dataObject.data.amount.toString()
-      this.setBrowserBadgeText(text, tabId)
+      this.setBrowserButtonBadgeText(text, tabId)
     }
   }
 }
