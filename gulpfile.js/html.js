@@ -4,6 +4,7 @@
  */
 
 const gulp = require('gulp')
+const gulpRename = require('gulp-rename')
 const gulpTwig = require('gulp-twig')
 const config = require('../project.config.js')
 
@@ -19,16 +20,20 @@ gulp.task('html:background', function () {
 })
 
 gulp.task('html:localized', function (cb) {
-  for (let locale of config.i18n.activatedLocales) {
-    const i18nJSON = require(`../src/i18n/${locale}/messages.json`)
-
-    gulp.src(`${config.sourceFolder}/html/*_${locale}.html.twig`)
+  for (const locale of config.i18n.activatedLocales) {
+    gulp.src([
+      `${config.sourceFolder}/html/install-success.html.twig`,
+      `${config.sourceFolder}/html/block.html.twig`
+    ])
       .pipe(
         gulpTwig({
-          data: i18nJSON,
+          data: { ...config.i18n[locale], lang: locale },
           extname: false
         })
       )
+      .pipe(gulpRename({
+        suffix: `_${locale}`
+      }))
       .pipe(gulp.dest(`${config.extensionFolderChrome}/data/html/`))
       .pipe(gulp.dest(`${config.extensionFolderFirefox}/data/html/`))
   }

@@ -22,10 +22,9 @@ const extensionFolderFirefox = path.join(extensionFolder, 'firefox')
 const extensionFolderChrome = path.join(extensionFolder, 'chrome')
 
 /**
- * WebExt Configuration
+ * WebExt Configuration: Firefox
  */
 
-// WebExt: Firefox
 const webExtConfigFirefox = {
   sourceDir: extensionFolderFirefox,
   artifactsDir: distFolderFirefox,
@@ -33,7 +32,10 @@ const webExtConfigFirefox = {
   noInput: true
 }
 
-// WebExt: Chrome
+/**
+ * WebExt Configuration: Chrome
+ */
+
 const webExtConfigChrome = {
   sourceDir: extensionFolderChrome,
   artifactsDir: distFolderChrome,
@@ -53,6 +55,24 @@ const i18n = {
   ]
 }
 
+/**
+ * i18n: Transform translations to easily-accessible plain strings, extracted from the `message` property.
+ */
+
+for (const locale of i18n.activatedLocales) {
+  const jsonLocale = require(`./src/i18n/${locale}/messages.json`)
+  const keys = Object.keys(jsonLocale)
+
+  keys.forEach((key, index) => {
+    i18n[locale] = i18n[locale] || {}
+    i18n[locale][key] = jsonLocale[key].message
+  })
+}
+
+/**
+ * Export data
+ */
+
 module.exports = {
   rootFolder,
   sourceFolder,
@@ -67,6 +87,6 @@ module.exports = {
   distFolderChrome,
   webExtConfigFirefox,
   webExtConfigChrome,
-  pkg,
-  i18n
+  i18n,
+  pkg
 }

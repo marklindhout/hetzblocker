@@ -31,10 +31,50 @@
     "message": "Folgende URL ist gesperrt worden von Hetzblocker: $URL$",
     "description": "Blocked URL console message.",
     "placeholders": {
-      "url" : {
-        "content" : "$1",
-        "example" : "https://www.domain.tld"
+      "url": {
+        "content": "$1",
+        "example": "https://www.domain.tld"
       }
     }
+  },
+  "blockHTMLWindowTitle": {
+    "message": "Seite gesperrt",
+    "description": "Blocking HTML page: Window title - <title>."
+  },
+  "blockHTMLPageTitle": {
+    "message": "Seite gesperrt",
+    "description": "Blocking HTML page: Page title <h1>."
+  },
+  "blockHTMLYourVisitHasBeenBlocked": {
+    "message": "Ihr Besuch an diese Seite ist gesperrt worden von der <em>Hetzblocker</em>-Erweiterung.",
+    "description": "Blocking HTML page: Your visit has been blocked."
+  },
+  "blockHTMLNoRequestsWereSent": {
+    "message": "Es sind keine Informationen an den angefragten Webseite verschickt worden.",
+    "description": "Blocking HTML page: No requests were sent."
+  },
+  "blockHTMLBlockURLLabel": {
+    "message": "Blockierte Web-Adresse (URL):",
+    "description": "Blocking HTML page: Blocking url, label text."
+  },
+  "blockHTMLBlockReasonLabel": {
+    "message": "Sperrungsgrund:",
+    "description": "Blocking HTML page: Blocking reason, label text."
+  },
+  "installSuccessHTMLWindowTitle": {
+    "message": "Erfolgreich installiert!",
+    "description": "Install Success HTML page: Window title - <title>."
+  },
+  "installSuccessHTMLPageTitle": {
+    "message": "Gratuliere!",
+    "description": "Install Success HTML page: Page title - <h1>."
+  },
+  "installSuccessHTMLExtensionInstalledSuccessfully": {
+    "message": "Der <em>Hetzblocker</em>-Erweiterung ist erfolgreich auf dieses Gerät installiert worden.",
+    "description": "Install Success HTML page: Extension installed successfully."
+  },
+  "installSuccessHTMLYouAreNowBlocking": {
+    "message": "Sie blockieren jetzt Links und Anfragen and Webseiten von Hetzmedia. Sehr gut!",
+    "description": "Install Success HTML page: You are now blocking."
   }
 }
