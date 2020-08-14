@@ -1,0 +1,25 @@
+{% extends "base/base.html.twig" %}
+
+{% block title %}{{ installSuccessHTMLWindowTitle }} - {{ extensionName }}{% endblock %}
+
+{% block head %}
+  {{ parent() }}
+  <link media="all" rel="stylesheet" href="../css/install-success.css"/>
+  {% include 'partials/favicons.html.twig' with {'state': 'success'} %}
+{% endblock %}
+
+{% block body %}
+  <main id="extensionPage">
+    {% include 'partials/large_icon.html.twig' with {'state': 'success'} %}
+    {% block content %}
+      <h1 class="pageHeading">{{ installSuccessHTMLPageTitle }}</h1>
+
+      <p>{{ installSuccessHTMLExtensionInstalledSuccessfully }}</p>
+      <p>{{ installSuccessHTMLYouAreNowBlocking }}</p>
+    {% endblock %}
+  </main>
+{% endblock %}
+
+{% block footer %}
+  <script src="../js/extensionPage_block.js"></script>
+{% endblock %}

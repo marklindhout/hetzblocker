@@ -36,5 +36,45 @@
         "example" : "https://www.domain.tld"
       }
     }
+  },
+  "blockHTMLWindowTitle": {
+    "message": "Deze website is geblokkeerd",
+    "description": "Blocking HTML page: Window title - <title>."
+  },
+  "blockHTMLPageTitle": {
+    "message": "Deze website is geblokkeerd",
+    "description": "Blocking HTML page: Page title <h1>."
+  },
+  "blockHTMLYourVisitHasBeenBlocked": {
+    "message": "Je bezoek aan deze website is geblokkeerd door de <em>Hetzblocker</em>-extensie.",
+    "description": "Blocking HTML page: Your visit has been blocked."
+  },
+  "blockHTMLNoRequestsWereSent": {
+    "message": "Er is géén informatie verstuurd naar de opgevraagde website.",
+    "description": "Blocking HTML page: No requests were sent."
+  },
+  "blockHTMLBlockURLLabel": {
+    "message": "Geblokkeerd adres (URL):",
+    "description": "Blocking HTML page: Blocking url, label text."
+  },
+  "blockHTMLBlockReasonLabel": {
+    "message": "Reden van deze blokkade:",
+    "description": "Blocking HTML page: Blocking reason, label text."
+  },
+  "installSuccessHTMLWindowTitle": {
+    "message": "Installatie geslaagd!",
+    "description": "Install Success HTML page: Window title - <title>."
+  },
+  "installSuccessHTMLPageTitle": {
+    "message": "Gefeliciteerd!",
+    "description": "Install Success HTML page: Page title - <h1>."
+  },
+  "installSuccessHTMLExtensionInstalledSuccessfully": {
+    "message": "De <em>Hetzblocker</em>-extensie is nu op dit apparaat geïnstalleerd.",
+    "description": "Install Success HTML page: Extension installed successfully."
+  },
+  "installSuccessHTMLYouAreNowBlocking": {
+    "message": "Je blokkeert nu actief bezoeken en aanvragen naar opruiende mediakanalen. Heel goed!",
+    "description": "Install Success HTML page: You are now blocking."
   }
 }

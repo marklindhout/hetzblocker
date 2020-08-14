@@ -1,0 +1,33 @@
+{% extends "base/base.html.twig" %}
+
+{% block title %}{{ blockHTMLWindowTitle }} - {{ extensionName }}{% endblock %}
+
+{% block head %}
+  {{ parent() }}
+  <link media="all" rel="stylesheet" href="../css/block.css"/>
+  {% include 'partials/favicons.html.twig' with {'state': 'blocked'} %}
+{% endblock %}
+
+{% block body %}
+  <main id="extensionPage">
+    {% include 'partials/large_icon.html.twig' with {'state': 'blocked'} %}
+    {% block content %}
+      <h1 class="pageHeading">{{ blockHTMLPageTitle }}</h1>
+
+      <p>{{ blockHTMLYourVisitHasBeenBlocked }}</p>
+      <p>{{ blockHTMLNoRequestsWereSent }}</p>
+
+      <dl class="blockDetails">
+        <dt>{{ blockHTMLBlockURLLabel }}</dt>
+        <dd id="blockUrl">…</dd>
+        <dt>{{ blockHTMLBlockReasonLabel }}</dt>
+        <dd id="blockReason">…</dd>
+      </dl>
+    {% endblock %}
+  </main>
+{% endblock %}
+
+{% block footer %}
+  <script src="../js/extensionPage_block.js"></script>
+{% endblock %}
+

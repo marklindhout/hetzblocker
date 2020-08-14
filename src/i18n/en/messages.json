@@ -36,5 +36,45 @@
         "example" : "https://www.domain.tld"
       }
     }
+  },
+  "blockHTMLWindowTitle": {
+    "message": "This site is blocked",
+    "description": "Blocking HTML page: Window title - <title>."
+  },
+  "blockHTMLPageTitle": {
+    "message": "This site is blocked",
+    "description": "Blocking HTML page: Page title <h1>."
+  },
+  "blockHTMLYourVisitHasBeenBlocked": {
+    "message": "Your request was blocked by the <em>Hetzblocker</em> extension.",
+    "description": "Blocking HTML page: Your visit has been blocked."
+  },
+  "blockHTMLNoRequestsWereSent": {
+    "message": "No data was sent to the requested website.",
+    "description": "Blocking HTML page: No requests were sent."
+  },
+  "blockHTMLBlockURLLabel": {
+    "message": "Blocked web address (URL):",
+    "description": "Blocking HTML page: Blocking url, label text."
+  },
+  "blockHTMLBlockReasonLabel": {
+    "message": "Reason for this block:",
+    "description": "Blocking HTML page: Blocking reason, label text."
+  },
+  "installSuccessHTMLWindowTitle": {
+    "message": "Installed successfully!",
+    "description": "Install Success HTML page: Window title - <title>."
+  },
+  "installSuccessHTMLPageTitle": {
+    "message": "Congratulations!",
+    "description": "Install Success HTML page: Page title - <h1>."
+  },
+  "installSuccessHTMLExtensionInstalledSuccessfully": {
+    "message": "The <em>Hetzblocker</em> extension was successfully installed.",
+    "description": "Install Success HTML page: Extension installed successfully."
+  },
+  "installSuccessHTMLYouAreNowBlocking": {
+    "message": "You are now actively blocking visits to inflammatory media outlets on this device. Well done!",
+    "description": "Install Success HTML page: You are now blocking."
   }
 }

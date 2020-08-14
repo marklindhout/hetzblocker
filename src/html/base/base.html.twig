@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="{{ lang | default('en') }}">
+<head>
+  <meta charset="utf-8">
+  {% block head %}
+    <title>{% block title %}Hetzblocker{% endblock %}</title>
+  {% endblock %}
+</head>
+<body>
+{% block body %}{% block content %}{% endblock %}{% endblock %}
+{% block footer %}{% endblock %}
+</body>
+</html>
