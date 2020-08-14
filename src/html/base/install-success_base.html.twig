@@ -2,12 +2,15 @@
 
 {% block head %}
   {{ parent() }}
-  <link media="all" rel="stylesheet" href="../css/install-success.css" />
+  <link media="all" rel="stylesheet" href="../css/install-success.css"/>
   {% include '../partials/favicons.html.twig' with {'state': 'success'} %}
 {% endblock %}
 
-{% block content %}
-  {% include '../partials/large_icon.html.twig' with {'state': 'success'} %}
+{% block body %}
+  <main id="extensionPage">
+    {% include '../partials/large_icon.html.twig' with {'state': 'success'} %}
+    {% block content %}{% endblock %}
+  </main>
 {% endblock %}
 
 {% block footer %}

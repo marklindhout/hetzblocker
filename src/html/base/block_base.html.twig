@@ -6,8 +6,11 @@
   {% include '../partials/favicons.html.twig' with {'state': 'blocked'} %}
 {% endblock %}
 
-{% block content %}
-  {% include '../partials/large_icon.html.twig' with {'state': 'blocked'} %}
+{% block body %}
+  <main id="extensionPage">
+    {% include '../partials/large_icon.html.twig' with {'state': 'blocked'} %}
+    {% block content %}{% endblock %}
+  </main>
 {% endblock %}
 
 {% block footer %}
