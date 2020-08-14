@@ -21,6 +21,11 @@ const extensionFolder = path.join(buildFolder, 'extension')
 const extensionFolderFirefox = path.join(extensionFolder, 'firefox')
 const extensionFolderChrome = path.join(extensionFolder, 'chrome')
 
+/**
+ * WebExt Configuration
+ */
+
+// WebExt: Firefox
 const webExtConfigFirefox = {
   sourceDir: extensionFolderFirefox,
   artifactsDir: distFolderFirefox,
@@ -28,11 +33,24 @@ const webExtConfigFirefox = {
   noInput: true
 }
 
+// WebExt: Chrome
 const webExtConfigChrome = {
   sourceDir: extensionFolderChrome,
   artifactsDir: distFolderChrome,
   overwriteDest: true,
   noInput: true
+}
+
+/**
+ * i18n Configuration
+ */
+
+const i18n = {
+  activatedLocales: [
+    'en',
+    'de',
+    'nl'
+  ]
 }
 
 module.exports = {
@@ -49,5 +67,6 @@ module.exports = {
   distFolderChrome,
   webExtConfigFirefox,
   webExtConfigChrome,
-  pkg
+  pkg,
+  i18n
 }

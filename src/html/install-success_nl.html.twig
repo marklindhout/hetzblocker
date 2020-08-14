@@ -1,17 +1,12 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Installatie geslaagd!</title>
-    <link media="all" rel="stylesheet" href="../css/install-success.css" />
-    {% include 'partials/favicons.html.twig' with {'state': 'success'} %}
-  </head>
-  <body>
-    <div id="extensionPage">
-      {% include 'partials/large_icon.html.twig' with {'state': 'success'} %}
-      <h1 class="pageHeading">Gefeliciteerd!</h1>
-      <p>De <em>Hetzblocker</em>-extensie is nu op dit apparaat geïnstalleerd.</p>
-      <p>Je blokkeert nu actief bezoeken en aanvragen naar opruiende mediakanalen. Heel goed!</p>
-    </div>
-  </body>
-</html>
+{% extends "base/install-success_base.html.twig" %}
+
+{% block title %}Installatie geslaagd! - {{ extensionName.message }}{% endblock %}
+
+{% block content %}
+  {{ parent() }}
+
+  <h1 class="pageHeading">Gefeliciteerd!</h1>
+
+  <p>De <em>Hetzblocker</em>-extensie is nu op dit apparaat geïnstalleerd.</p>
+  <p>Je blokkeert nu actief bezoeken en aanvragen naar opruiende mediakanalen. Heel goed!</p>
+{% endblock %}

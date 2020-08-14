@@ -1,15 +1,12 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Seite gesperrt</title>
-  <link media="all" rel="stylesheet" href="../css/block.css"/>
-  {% include 'partials/favicons.html.twig' with {'state': 'blocked'} %}
-</head>
-<body>
-<div id="extensionPage">
-  {% include 'partials/large_icon.html.twig' with {'state': 'blocked'} %}
+{% extends "base/block_base.html.twig" %}
+
+{% block title %}Seite gesperrt - {{ extensionName.message }}{% endblock %}
+
+{% block content %}
+  {{ parent() }}
+
   <h1 class="pageHeading">Seite gesperrt</h1>
+
   <p>Ihr Besuch an diese Seite ist gesperrt worden von der <em>Hetzblocker</em>-Erweiterung.</p>
   <p>Es sind keine Informationen an den angefragten Webseite verschickt worden.</p>
 
@@ -19,8 +16,4 @@
     <dt>Sperrungsgrund:</dt>
     <dd id="blockReason"></dd>
   </dl>
-</div>
-
-<script src="../js/extensionPage_block.js"></script>
-</body>
-</html>
+{% endblock %}

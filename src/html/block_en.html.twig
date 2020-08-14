@@ -1,15 +1,12 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>This site is blocked</title>
-  <link media="all" rel="stylesheet" href="../css/block.css"/>
-  {% include 'partials/favicons.html.twig' with {'state': 'blocked'} %}
-</head>
-<body>
-<div id="extensionPage">
-  {% include 'partials/large_icon.html.twig' with {'state': 'blocked'} %}
+{% extends "base/block_base.html.twig" %}
+
+{% block title %}This site is blocked - {{ extensionName.message }}{% endblock %}
+
+{% block content %}
+  {{ parent() }}
+
   <h1 class="pageHeading">This site is blocked</h1>
+
   <p>Your request was blocked by the <em>Hetzblocker</em> extension.</p>
   <p>No data was sent to the requested website.</p>
 
@@ -19,8 +16,4 @@
     <dt>Reason for this block:</dt>
     <dd id="blockReason"></dd>
   </dl>
-</div>
-
-<script src="../js/extensionPage_block.js"></script>
-</body>
-</html>
+{% endblock %}
