@@ -16,24 +16,48 @@ version can be found at one of the following links:
 
 Hetzblocker uses two dedicated lists for blocking: a domain list, and a URL list.
 
+## Domain Block-List
+
+Domain list entries are used for publishers and platforms whose business model or core behaviour is based on breaking [The Rules](https://github.com/marklindhout/hetzblocker/wiki/The-Rules:-What-does-Hetzblocker-block%3F).
+
 The domain list can be found at [src/js/common/domainlist.js](https://github.com/marklindhout/hetzblocker/blob/master/src/js/common/domainlist.js).
 This list is used to block entire domains.
-The entry `'bild.de'` will block for `www.bild.de`, `media.bild.de`, and `bild.de`.
-This means that all subdomains are automatically globbed as well.
+This means that **all** pages within a domain are matched.
+Domain list entries are matched on the URL’s **domain** and **top-level domain**.
+This means that the entry `'exampledomain.de'` will block `'www.exampledomain.de'`, `'media.exampledomain.de'`, and `'exampledomain.de'`.
+
+## URL Block-List
 
 Since it’s unpractical to block an entire blogging platform like Medium or WordPress if just one author is misbehaving, Hetzblocker also contains a URL block list.
 This second one is a list with full URLs to block. Blocking only works if the match is exact.
 This list can block YouTube channels, Twitter accounts, Medium authors, etc.
-List entries are matched on the URL’s domain name and path.
+Page list entries are matched on the URL’s **sub-domain**, **domain**, **top-level domain**, and **path**.
 The URL block list can be found at [src/js/common/pagelist.js](https://github.com/marklindhout/hetzblocker/blob/master/src/js/common/pagelist.js)
 
+**Note:** Query parameters are not taken into consideration. This means that the list entry `'http://site.tld/path'` matches `'http://site.tld/path'` and `'http://site.tld/path?foo=bar'`. There are platforms that use query parameters for account or author differentiation, but those are few and far in between. If this case pops up, an implementation can be written.
+
 # Developing Hetzblocker
+
 
 ## Coding Standards
 
 This is an extension that is planned for all platforms supporting the Webextension standard.
-The JavaScript has (for now) been written in ES5, and uses Gulp.js for building and resources manipulation.
-There is no transpilation taking place: It’s ES5 all the way down.
+The JavaScript has been written in ES6, and uses Gulp and Babel for building and transpilation.
+
+## Code Style
+
+Hetzblocker uses the [JavaScript Standard Style](https://standardjs.com/) for code formatting and code style.
+For other files, the project’s included [Editor Config](https://editorconfig.org/) applies.
+
+### Testing
+
+**No untested code in production!**<sup>1, 2, 3</sup>
+
+<sup>1</sup> In an ideal world, Hetzblocker would have full test coverage
+
+<sup>2</sup> Also, in an ideal world Hetzblocker would not be needed.
+
+<sup>3</sup> The goal is high test coverage, but let’s keep it realistic and treat this on a case-by-case basis.
 
 ## System Requirements
 
@@ -94,4 +118,4 @@ Usually this is because there’s an old version of Node on you system, and your
 
 Make sure both installation and execution of the Node modules is done with the same Node version, and you should be fine.
 
-For more info, check out: https://github.com/lovell/sharp/issues/952 
+For more info, check out: https://github.com/lovell/sharp/issues/952
