@@ -1,6 +1,4 @@
-# Hetzblocker Browser Extension
-
-## Usage in the Browser
+# Hetzblocker in the Browser
 
 This is the source code repository for the Hetzblocker browser extension,
 currently available for Firefox and Chrome. If you want to develop the
@@ -12,7 +10,7 @@ version can be found at one of the following links:
   - [Hetzblocker for Firefox](https://addons.mozilla.org/en-US/firefox/addon/hetzblocker/)
   - [Hetzblocker for Chrome](https://chrome.google.com/webstore/detail/hetzblocker/mhmohgpdkkegialpboobiebjjhgjabii)
 
-## Blocked Sites and URLs
+# Block-Lists
 
 Hetzblocker uses two dedicated lists for blocking: a domain list, and a URL list.
 
@@ -37,7 +35,6 @@ The URL block list can be found at [src/js/common/pagelist.js](https://github.co
 **Note:** Query parameters are not taken into consideration. This means that the list entry `'http://site.tld/path'` matches `'http://site.tld/path'` and `'http://site.tld/path?foo=bar'`. There are platforms that use query parameters for account or author differentiation, but those are few and far in between. If this case pops up, an implementation can be written.
 
 # Developing Hetzblocker
-
 
 ## Coding Standards
 
@@ -99,7 +96,7 @@ npx gulp dist
 
 The ZIP files will be placed in the folder `dist/BROWSER/hetzblocker-VERSION.zip`
 
-# Troubleshooting
+## Troubleshooting
 
 ### VIPS compilation errors on Ubuntu during `npm install`
 
