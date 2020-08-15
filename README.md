@@ -10,11 +10,11 @@ version can be found at one of the following links:
   - [Hetzblocker for Firefox](https://addons.mozilla.org/en-US/firefox/addon/hetzblocker/)
   - [Hetzblocker for Chrome](https://chrome.google.com/webstore/detail/hetzblocker/mhmohgpdkkegialpboobiebjjhgjabii)
 
-# Block-Lists
+# Hetzblocker Block-Lists
 
 Hetzblocker uses two dedicated lists for blocking: a domain list, and a URL list.
 
-## Domain Block-List
+### Domain Block-List
 
 Domain list entries are used for publishers and platforms whose business model or core behaviour is based on breaking [The Rules](https://github.com/marklindhout/hetzblocker/wiki/The-Rules:-What-does-Hetzblocker-block%3F).
 
@@ -24,7 +24,7 @@ This means that **all** pages within a domain are matched.
 Domain list entries are matched on the URL’s **domain** and **top-level domain**.
 This means that the entry `'exampledomain.de'` will block `'www.exampledomain.de'`, `'media.exampledomain.de'`, and `'exampledomain.de'`.
 
-## URL Block-List
+### URL Block-List
 
 Since it’s unpractical to block an entire blogging platform like Medium or WordPress if just one author is misbehaving, Hetzblocker also contains a URL block list.
 This second one is a list with full URLs to block. Blocking only works if the match is exact.
@@ -34,14 +34,17 @@ The URL block list can be found at [src/js/common/pagelist.js](https://github.co
 
 **Note:** Query parameters are not taken into consideration. This means that the list entry `'http://site.tld/path'` matches `'http://site.tld/path'` and `'http://site.tld/path?foo=bar'`. There are platforms that use query parameters for account or author differentiation, but those are few and far in between. If this case pops up, an implementation can be written.
 
-# Developing Hetzblocker
+# Hetzblocker Development and Contributing
 
-## Coding Standards
+### System Requirements
+
+  - **[Node.js](https://nodejs.org/)**, version 13 was tested, others might work.
+  - **NPM**, version 6 or higher. (NPM is usually included with Node.js)
+
+### Coding Standards
 
 This is an extension that is planned for all platforms supporting the Webextension standard.
 The JavaScript has been written in ES6, and uses Gulp and Babel for building and transpilation.
-
-## Code Style
 
 Hetzblocker uses the [JavaScript Standard Style](https://standardjs.com/) for code formatting and code style.
 For other files, the project’s included [Editor Config](https://editorconfig.org/) applies.
@@ -56,24 +59,11 @@ For other files, the project’s included [Editor Config](https://editorconfig.o
 
 <sup>3</sup> The goal is high test coverage, but let’s keep it realistic and treat this on a case-by-case basis.
 
-## System Requirements
-
-  - **[Node.js](https://nodejs.org/)**, version 13 was tested, others might work.
-  - **NPM**, version 6 or higher. (NPM is usually included with Node.js)
-
-### Setup
+### Project Setup
 First, you need to install NPM modules using:
 ```bash
 npm install
 ```
-
-### Developing the extension
-Then, to run the build task, and watch for file changes, you can run:
-```bash
-npx gulp
-```
-This builds the entire extension, after which it starts file watchers for each
-sub-task.
 
 ### Build the extension
 To create an unpacked extension for all browser templates, you can run:
@@ -86,6 +76,14 @@ This will place the built, unpacked extensions into: `build/extension/BROWSER/`
 
 You can then load these folders’ `manifest.json` files into your browser to test them.
 
+### Local Development of the extension
+To run the build task, and watch for file changes, you can run:
+```bash
+npx gulp
+```
+This builds the entire extension, after which it starts file watchers for each
+sub-task.
+
 ### Create a Distributable package
 
 This task will create a versioned, zipped version of the browser extension, run:
@@ -96,7 +94,7 @@ npx gulp dist
 
 The ZIP files will be placed in the folder `dist/BROWSER/hetzblocker-VERSION.zip`
 
-## Troubleshooting
+# Troubleshooting
 
 ### VIPS compilation errors on Ubuntu during `npm install`
 
