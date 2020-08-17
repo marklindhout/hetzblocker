@@ -15,7 +15,7 @@ jobs:
         uses: "actions/cache@v2"
         with:
           path: "~/.npm"
-          key: "${{ runner.os }}-npm-${{ hashFiles('./package-lock.json') }}"
+          key: "${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}"
           restore-keys: |
             ${{ runner.os }}-npm-
             ${{ runner.os }}-
@@ -30,3 +30,8 @@ jobs:
 
       - name: "Run Tests"
         run: "npm run test"
+
+      - uses: "actions/upload-artifact@master"
+        with:
+          name: "Coverage Report (${{ github.sha }})"
+          path: "./coverage"
