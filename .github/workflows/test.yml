@@ -11,6 +11,15 @@ jobs:
       - name: "Checkout Code"
         uses: "actions/checkout@v2"
 
+      - name: "Cache node_modules"
+        uses: "actions/cache@v2"
+        with:
+          path: "~/.npm"
+          key: "${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}"
+          restore-keys: |
+            ${{ runner.os }}-npm-
+            ${{ runner.os }}-
+
       - name: "Setup NodeJS Environment"
         uses: "actions/setup-node@v1"
         with:
