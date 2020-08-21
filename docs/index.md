@@ -1,6 +1,4 @@
-_**Awareness of quality and responsibility in online media**_
-
-## Mission Statement
+## Awareness of quality and responsibility in online media
 
 In their relentless quest to attract readers, online media often publishes content that is negative, sensationalist and manipulative.
 Page traffic, ad exposure and revenues are more important than content quality and responsibility towards the reader.
