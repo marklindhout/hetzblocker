@@ -94,6 +94,10 @@ npx gulp dist
 
 The ZIP files will be placed in the folder `dist/BROWSER/hetzblocker-VERSION.zip`
 
+# Thanks
+
+This extension is heavily inspired by [autinerd’s hosts file](https://github.com/autinerd/anti-axelspringer-hosts), plus [revengeday](https://github.com/revengeday)’s and [rleh](https://github.com/rleh)’s work on browser extensions.
+
 # Troubleshooting
 
 ### VIPS compilation errors on Ubuntu during `npm install`
