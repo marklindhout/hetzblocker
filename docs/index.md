@@ -1,15 +1,19 @@
-## Awareness of quality and responsibility in online media
+## Raising awareness of quality and responsibility in online media
 
-In their relentless quest to attract readers, online media often publishes content that is negative, sensationalist and manipulative.
+In their relentless quest to attract readers, online media often publish content that is negative, sensationalist and manipulative.
 Page traffic, ad exposure and revenues are more important than content quality and responsibility towards the reader.
-Both content and information design are optimized for click-baiting: triggering curiosity over and over again.
-One can observe that such content influences mainstream opinion, stimulates consumption, or influences people’s in one way or another.
+Both content and information design are optimized to perpetuate the vicious cycle:
+First, an addictive algorithm repeatedly triggers curiosity, after which outrageous click-bait raises red flags in our brains.
+The process continues by confirming biases, tapping into fear and anger, entrenching opinions and ideas — estranging us from our fellow human beings.
+If that wasn’t enough, this kind of media is knowingly wasting our time. It keeps us busy, glued to our screens, absorbed in anger.
 
-Thus, content usually lacks quality attributes, such as validity of information, traceability of arguments, separation of facts and opinion, and a holistic consideration or relative context.
+Such content influences opinion, stimulates consumption, or coerces people in one way or another.
+It lacks quality attributes, such as validity of information, traceability of arguments, separation of facts and opinion.
+It lacks a wider view, it deliberatly over-simplifies topic matter, and ignores essential complexities.
 
 The content providers work with sophisticated manipulation techniques, tapping, among others, our cognitive reward system and the human tendency towards laziness.
 Accordingly, readers fall in the “can’t stop reading” trap but without getting sound information.
-In sum, people show unhealthy reading behavior by feeding their brain with negative, manipulating, superficial and short-lived information.
+In sum, people continue harmful reading behavior by feeding their brain with negative, manipulating, superficial and short-lived information.
 
 Radicalization and censorship come into play here.
 As presented by sociologist Zeynep Tufekci, modern censorship works by creating confusion, cynicism, mistrust.
@@ -65,6 +69,6 @@ Hetzblocker Media Safeguard’s source code is available under a GPL 3 open sour
 Collaboration takes place on GitHub at https://github.com/marklindhout/hetzblocker, and you are free to clone, fork and contribute code to the repository as you please.
 
 The block list is curated by the Hetzblocker Media Safeguard team.
-If you would like to the curation team, you can send an email or open a request on the issue tracker at: https://github.com/marklindhout/hetzblocker/issues
+If you would like to join the curation team, you can send an email or open a request on the issue tracker at: https://github.com/marklindhout/hetzblocker/issues
 
 We hope to see you there!
