@@ -29,7 +29,7 @@
     "gulp-zip": "^4.2.0",
     "jest-cli": "^24.9.0",
     "jest-webextension-mock": "^3.6.1",
-    "sharp": "^0.25.4",
+    "sharp": "^0.30.5",
     "standard": "^12.0.1",
     "web-ext": "^5.0.0"
   },
